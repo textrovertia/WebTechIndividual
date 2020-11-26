@@ -1,0 +1,178 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: whitesmoke;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5em;
+    background-image: url(../images/mockup-photos-5nUNdLueQio-unsplash.jpg);
+    background-size: cover ;
+    background-attachment: fixed;
+  
+
+}
+
+
+/* Menu floated to right*/
+
+ul{
+    display:inline-block;
+}
+
+
+.navbar-custom{
+    background-color: none;
+    color:white;
+}
+
+#right-menu{
+    float: right;
+}
+.nav-item, .navbar-brand{
+    font-weight: bolder;
+    color: white;
+    vertical-align: center;
+}
+
+.nav-link{
+    color: white;
+}
+.logo{
+    height: 50px;
+}
+.navbar-custom{
+    background-color: none;
+    color:white;
+  }
+  
+  #right-menu{
+    float: right;
+  }
+
+
+#right-menu{
+    float: right;
+}
+.nav-item, .navbar-brand{
+    font-weight: bolder;
+    color: white;
+}
+
+.nav-item:hover{
+    text-decoration: none; 
+}
+
+
+
+
+/*Body*/
+.allow{
+    color:white;
+}
+h1{
+    text-align:center;
+    padding: 30px;
+}
+
+p{
+    color: white;
+}
+
+.myheader{
+    text-align: center;
+    margin-top: -20px;
+    background-color: rgba(95, 158, 160, 0.11);
+}
+
+.contactus{
+    margin:auto;
+    vertical-align: center;
+}
+
+
+
+form{
+    margin:auto;
+    text-align:center;
+    width: 25em;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+
+}
+textarea{
+    text-align: left;
+    border:0.5px solid #8cacaa5b;
+    border-radius: 10px;
+    height: 2em;
+    width: 20em;
+    margin: 4px;
+}
+form input{
+    text-align: left;
+    border:0.5px solid #8cacaa5b;
+    border-radius: 10px;
+    height: 2em;
+    width: 20em;
+    margin: 4px;
+}
+form input:active{
+    text-decoration: none;
+}
+
+.firstname:active{
+    text-decoration: none;
+}
+.firstname{
+    float:left;
+   margin-left:40px;
+}
+
+form label{
+   float:left;
+   margin-left:40px;
+    
+}
+
+.message{
+    height:15em;
+}
+
+
+#submit{
+    text-align: center;
+    width:5em;
+  
+}
+
+#submit:hover{
+    background-color: #8cacaa5b;;
+}
+
+
+/*Footer*/ 
+.panel-footer{
+    background-color: #43907f;
+    color:white;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.middle{
+    text-align: center;
+    margin-bottom:10px;
+}
+
+.middle:hover{
+    color: #31a8bd;
+}
+@media screen and (max-width: 574px) {
+    .myfooter{
+        width:50%;
+    }
+
+
+  }
+

@@ -1,0 +1,170 @@
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color:  #222;;
+    font-family: 'Lato', sans-serif;
+   /* font-family: 'Amiri', serif;*/
+    font-size: 1.5em;
+    color:white;
+}
+
+.dark-mode{
+    background-color:#222;
+    color:white;
+}
+
+
+
+/*Menu*/
+header{
+    background:url(../images/home-background2.jpg) no-repeat center ;
+    background-size: cover;
+    width:100%;
+    height: 70em;
+   
+    max-height: 700px;
+  }
+
+ul{
+    display:inline-block;
+}
+
+
+.navbar-custom{
+    background-color: none;
+    color:white;
+}
+
+#right-menu{
+    float: right;
+}
+.nav-item, .navbar-brand{
+    font-weight: bolder;
+    color: white;
+    vertical-align: center;
+}
+
+.nav-link{
+    color: white;
+}
+.logo{
+    height: 50px;
+}
+
+.btn{
+    color: white;
+}
+
+
+.btn2{
+    color:black;
+}
+.myleft:hover, .myleft:visited,.btn:active {
+    color:#43907f;
+}
+
+.card-header{
+    background-color:whitesmoke;
+    color:#43907f;
+   
+
+}
+
+.cardheader2{
+    background-color: #222;
+}
+
+.card-body{
+    background-color: rgba(0, 0, 0, 0.253);
+    color: black;
+}
+
+.page-heading {
+	padding: 210px 0px 180px 0px;
+	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+p{
+    padding:2rem;
+    font-size: 2rem;
+    font-family: 'Lato', sans-serif;
+}
+.hh{
+    font-size: 7em;
+    color:white;
+}
+/*Body*/
+.search{
+    color:black;
+}
+.darker{
+    float: right;
+    border-radius: 40px;
+    background-color: #43907f;
+
+}
+h1{
+    text-align: center;
+    font-weight: bolder;
+    color:#43907f;
+
+}
+
+h2{
+    color:#43907f;
+}
+
+.plus{
+    float: right;
+}
+
+
+/*Accordion*/
+.myleft{
+    float:left;
+    color:black;
+}
+
+.myright{
+    float:right;
+    color:black;
+}
+
+/*Footer*/ 
+.panel-footer{
+    background-color: #43907f;
+    color:white;
+}
+
+.middle{
+    text-align: center;
+    margin-bottom:10px;
+}
+
+.middle:hover{
+    color: #31a8bd;
+}
+@media screen and (max-width: 574px) {
+    .partner{
+        width: 360px;
+        margin: 0 auto 15px;
+    }
+
+    .myfooter{
+        width:50%;
+    }
+
+
+  }
+
+
+
+
+
+
