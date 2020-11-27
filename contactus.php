@@ -141,6 +141,7 @@
 
     if (empty($firstname) || empty($lastname) ){
       echo '<script>alert("Please fill the form")</script>';
+      preventDefault();
     }else{
       
         if ($conn->query($sql)===true){

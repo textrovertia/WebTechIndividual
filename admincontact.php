@@ -26,7 +26,7 @@ $servername = "localhost";
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/contactinfo.css" >
+    <link rel="stylesheet" href="css/admincontact.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -52,13 +52,14 @@ $servername = "localhost";
             <a href="#cars">Warehouse</a>
             <a href="#clients">Inventory</a>
             <a href="#contact">Employees</a>
+            <a href="adminpartner.php">Partners</a>
             <a href="contactinfo.php">Contact and Messages </a>
     </div>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         
     <div id="orders">
-      <h3>Reservations</h3>
+      <h3>Contact Us</h3>
       <hr>
     
     <div class="table-responsive">
