@@ -54,8 +54,10 @@
                     <div class="aboutus col-md-6">
                         <h1 class="allow">Got A Problem?</h1>
                         <p>Freezelink is Ghana’s leading professional third party logistics company, dealing in cold chain transportation.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar molestie venenatis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus vel ex eget felis interdum scelerisque. Sed est dolor, bibendum id ex eget, accumsan euismod ipsum. Maecenas condimentum dignissim fringilla. Sed in ante ut augue posuere congue a in erat. Nunc tempor dui in risus faucibus, sit amet rhoncus libero aliquet. Pellentesque sollicitudin est accumsan, congue dolor vel, bibendum tellus. Morbi arcu nisi, finibus in aliquet rhoncus, rutrum in nunc</p>
-
-                    
+                        <h3 class="allow" style="text-align:center">Find Us At</h3>
+                        <div class="map">
+                        <iframe style="margin:auto; height: auto; width: fit-content; border: 3px solid #43907f; " id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.7265527753393!2d-0.14122338576222937!3d5.607347495934881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf85647736060d%3A0xee576f62d47b657d!2sFreezeLink!5e0!3m2!1sen!2sgh!4v1606490642337!5m2!1sen!2sgh" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
                     </div>
                     <br class="visible-xs">
                     <div class="contactus col-md-6">

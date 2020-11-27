@@ -69,8 +69,9 @@ ul{
 /*Body*/
 .allow{
     color:white;
+    text-align:center;
 }
-h1{
+h1, h3{
     text-align:center;
     padding: 30px;
 }
@@ -149,6 +150,13 @@ form label{
 
 #submit:hover{
     background-color: #8cacaa5b;;
+}
+
+/*Map*/
+#map{
+    margin: auto;
+    width: fit-content;
+    height: auto;
 }
 
 

@@ -16,7 +16,7 @@ $servername = "localhost";
     }else{
       echo "Connection successful";
     };
-    $sql = "SELECT * FROM inventory";
+    $sql = "SELECT * FROM contactus";
     $result = $conn->query($sql);
   
 
@@ -51,7 +51,7 @@ $servername = "localhost";
             <a href="#orders">Customer</a>
             <a href="#cars">Warehouse</a>
             <a href="#clients">Inventory</a>
-            <a href="admincontact.php">Employees</a>
+            <a href="#contact">Employees</a>
             <a href="adminpartner.php">Partners</a>
             <a href="contactinfo.php">Contact and Messages </a>
     </div>

@@ -50,9 +50,10 @@ $servername = "localhost";
     <div class="sidenav">
             <a href="#orders">Customer</a>
             <a href="#cars">Warehouse</a>
-            <a href="#clients">Inventory</a>
-            <a href="#contact">Employees</a>
-            <a href="contactinfo.php">Contact and Messages </a>
+            <a href="admininventory.php">Inventory</a>
+            <a href="adminemployee.php">Employees</a>
+            <a href="adminpartners.php">Partners</a>
+            <a href="admincontact.php">Contact and Messages </a>
     </div>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -60,6 +61,23 @@ $servername = "localhost";
     <div id="orders">
       <h3>Partners</h3>
       <hr>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Number of Partner Organisations</h5>
+               
+               
+                <p class="card-text">Equipment Donated:</p>
+                
+               
+          
+            </div>
+            </div>
+        </div>
+
 
       <?php
 
@@ -70,18 +88,19 @@ $servername = "localhost";
           ?>		 
 
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="card">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $row["organisation_name"]; ?></h5>
                
-                <p class="card-text"> <?php echo $row["partner_logo"]; ?></p>
+                <p class="card-text"> <?//php echo $row["partner_logo"]; ?></p>
                 <p class="card-text">Equipment Donated:</p>
                 <p class="card-text"><?php echo $row["equipment_donated"]?> </p>
                 <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                         Edit
                       </button>
-                <a href="#" class="btn btn-secondary">Delete</a>
+                <a href="#" class="btn btn-secondary" onclick="alert('Do you want to delete this?')">Delete</a>
+          
             </div>
             </div>
         </div>
@@ -91,6 +110,7 @@ $servername = "localhost";
           } }
         ?>
     
+
     
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -103,7 +123,7 @@ $servername = "localhost";
                     </div>
                     <div class="modal-body">
                     
-                      <form id="partnerform">
+                      <form id="partnerform" method="POST" action="upload.php" enctype="multipart/form-data" >
                         <p>Please enter the information below</p>
                         
                         <table>
@@ -119,13 +139,13 @@ $servername = "localhost";
                             </tr>
                             <tr>
                                 <th> Company Logo</th>
-                                <th><input  type="file" required> </th>
+                                <th><input  type="file" name="fileToUpload" id="fileToUpload" required> </th>
                             </tr>
 
                         </table>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <a type="submit" onclick="getdisplaymode()" href="home.html" type="button" id="togglemode" class="btn btn-primary">Go to Site</a>
+                            <a type="submit" onclick="getdisplaymode()" href="home.html" type="button" id="togglemode" class="btn btn-primary">Update</a>
                           </div>
                       </form>
                       <p id="result"></p>
@@ -137,6 +157,9 @@ $servername = "localhost";
     </div>
 </div>
 
+
+
+        <a href="#" class="btn btn-secondary">Add Car</a>
 
 
     </main>
