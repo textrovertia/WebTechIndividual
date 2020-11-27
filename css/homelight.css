@@ -138,10 +138,6 @@ button{
     color: #31a8bd;
 }
 
-.productimage{
-    width: 50%;
-    object-fit: cover;
-}
 
 @media screen and (max-width: 574px) {
     .partner{
@@ -151,6 +147,14 @@ button{
 
     .myfooter{
         width:50%;
+    }
+
+    .homeimage{
+       
+        height:auto;
+        width: 360px;
+        margin: 0 auto 15px;
+    
     }
 
 
