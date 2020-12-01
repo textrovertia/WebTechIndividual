@@ -119,45 +119,56 @@
 
 
 
-<div id="container" class="container">
-  
-  
-  <!-- Each image is 350px by 233px -->
-  <div class="photobanner">
-    
-    <img class="first" src="https://c2.staticflickr.com/9/8454/28951308921_6589e3f1d3_z.jpg">
-<img src="https://c3.staticflickr.com/9/8716/28407134794_bef4e3b216_z.jpg">
-
-<img src="https://c2.staticflickr.com/9/8334/28951307401_d8a7c852e9_z.jpg">
-
-<img src="https://c1.staticflickr.com/9/8190/28407132824_fdf7bfe154_z.jpg">
-
-<img src="https://c2.staticflickr.com/9/8210/28951305801_bfe7c0b346_z.jpg">
-
-<img src="https://c1.staticflickr.com/9/8716/28407131024_91c2626d3c_z.jpg">
-
-<img src="https://c2.staticflickr.com/9/8592/28951304321_a01fb808fb_z.jpg">
-
-<img src="https://c1.staticflickr.com/9/8869/28407129424_54ea0f3d5a_z.jpg">
-    <img  src="https://c2.staticflickr.com/9/8454/28951308921_6589e3f1d3_z.jpg">
-<img src="https://c3.staticflickr.com/9/8716/28407134794_bef4e3b216_z.jpg">
-
-<img src="https://c2.staticflickr.com/9/8334/28951307401_d8a7c852e9_z.jpg">
-
-<img src="https://c1.staticflickr.com/9/8190/28407132824_fdf7bfe154_z.jpg">
-
-<img src="https://c2.staticflickr.com/9/8210/28951305801_bfe7c0b346_z.jpg">
-
-<img src="https://c1.staticflickr.com/9/8716/28407131024_91c2626d3c_z.jpg">
-
-<img src="https://c2.staticflickr.com/9/8592/28951304321_a01fb808fb_z.jpg">
-
-<img src="https://c1.staticflickr.com/9/8869/28407129424_54ea0f3d5a_z.jpg">
-
-
-
-      </div>
 </div>
+    <div class="container text-center">
+        <h1 class="font-weight-light mb-5">Bootstrap 4 Multi Item Carousel Example</h1>
+        <div class="row mx-auto my-auto">
+            <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                <div class="carousel-inner w-100" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="col-lg-4 col-md-6">
+                            <img class="img-fluid productimage" src="images/medicine.jpg" style="width: 100% object-fit: cover; border: 3px solid #43907f ; border-radius: 50px">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-lg-4 col-md-6">
+                            <img class="img-fluid" src="http://placehold.it/350x180?text=2">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-lg-4 col-md-6">
+                            <img class="img-fluid" src="http://placehold.it/350x180?text=3">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-lg-4 col-md-6">
+                            <img class="img-fluid" src="http://placehold.it/350x180?text=4">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-lg-4 col-md-6">
+                            <img class="img-fluid" src="http://placehold.it/350x180?text=5">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="col-lg-4 col-md-6">
+                            <img class="img-fluid" src="http://placehold.it/350x180?text=6">
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev  w-auto" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next w-auto" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 
 </main>
 
@@ -192,5 +203,46 @@
             <div class="text-center">&copy; Copyright Freezelink Limited Ghana 2020</div>
           </div>
         </footer>
+
+
+        <script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+    <!--scripts loaded here-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="carousel.js"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+        <script src="js/view.js"></script>
+
+
+
+        
     </body>
 </html>

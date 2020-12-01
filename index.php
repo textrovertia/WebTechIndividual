@@ -13,6 +13,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="js/colormode.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -25,11 +27,14 @@
                 <div>
                     <p>Welcome to Freezelink Limited! Are you a faculty member or a customer?</p>
                     <form>
-                      <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                      <button href="#exampleModalCenter" type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                         Customer
                       </button>
                        <br>
-                      <a href="login.html" type="button" class="btn btn-primary" id="mybtn2">Employee</a>
+                       <button href="#exampleModalCenter2" type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+                        Employee
+                      </button>
+                     
 
                     </form>
                 </div>
@@ -37,7 +42,7 @@
           </span>
             <!-- Button trigger modal -->
            
-    
+            <!--Modal for Customer -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -66,8 +71,114 @@
                   </div>
                 </div>
               </div>
-       </main>
 
+
+
+              <!--Modal for Employee Login-->
+
+
+              <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Employee Login </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                      <form id="myform" method="POST">
+                        <p>Kindly provide your employee login details below</p>
+                        <p>Email: <input type="text" name="email"/></p>
+                        <p>Password: <input type="password" name="password1"></p>
+                      
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                            <input type="submit" value="Login" name="login" class="btn btn-primary">
+                          </div>
+                      </form>
+                      <p id="result"></p>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+       </main>
+       
        
     </body>
 </html>
+
+
+<?php
+$servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "freezelink";
+
+
+
+    //Create connection
+    $conn = new mysqli($servername, $username, $password,$dbname);
+    
+   
+    //Check connection
+    if ($conn->connect_error){
+        die("Connection failed:".$conn->connect_error);
+    }
+
+    if ($conn->connect_error){
+        die("connection fail: " . $conn->connect_error);
+    }
+
+
+    if(isset($_POST['login'])){
+    $error="";
+        $sql=
+   
+        $user = $_POST['email'];
+        $pass = $_POST['password1'];
+        $result = $conn->query("select * from manager where email = '$user'");
+        $row = mysqli_fetch_assoc($result);
+        $hash=$row["account_password"];
+        $auth = password_verify($_POST['password1'], $hash);
+
+       if($result->num_rows > 0)
+       {
+            $_SESSION["id"] = $row['id'];
+            $_SESSION["name"] = $row['name'];
+           if ($auth===TRUE){
+            
+          
+            header('location:admincontact.php');
+           }else{
+               
+            echo '
+            <script> 
+                 
+            function sweet(){
+              swal({
+                      title: "Wrong password",
+                      text: "You entered the wrong password. You have four more attempts",
+                      icon: "error",
+                    }); 
+             }
+                  sweet() 
+            </script>';
+           }
+           
+       }
+    
+
+    }else{
+      
+           
+           
+    }
+    
+?>
+
+
+?>
+

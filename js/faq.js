@@ -1,5 +1,5 @@
 
-//Dark Mode
+//Dark Mode for card
   function myFunction() {
     var element1 = document.body;
     var element2= document.body.getElementsByClassName("card-header");
@@ -20,6 +20,9 @@
   }
 
 
+
+
+//Accordion buttons
 function clicked(){
     var x = document.getElementById("btn1");
     console.log(x)
@@ -64,6 +67,23 @@ function clicked4(){
 }
 
 
+
+  
+function clicked5(){
+  var x = document.getElementById("btn5");
+  console.log(x)
+  if (x.innerHTML === "+") {
+    x.innerHTML = "-";
+  } else {
+    x.innerHTML = "+";
+  }
+}
+
+
+
+//Darkmode 
+
+
 webmode=localStorage.getItem("webmode");
 console.log(webmode);
 
@@ -78,3 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
     themeStylesheet.href='css/faqdark.css';
   }
 })
+
+
+//Search functionality:
+$(document).ready(function(){
+    console.log("Hi")
+    $('.search').on("keyup", function(){
+        var value=$(this).val().toLowerCase();
+        console.log(value)
+        console.log($("#accordion .card"))
+        $("#accordion .card ").filter(function(){
+            $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1)
+        })
+    })
+})
+

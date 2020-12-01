@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link id="theme" rel="stylesheet" href="css/viewlight.css">
+        <link id="theme" rel="stylesheet" href="css/viewlight1.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
@@ -31,9 +31,24 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
                 <div class="navbar-nav" id="right-menu">
-                  <a class="nav-item nav-link active" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" style="color:white;" href="view.html">View Our Products</a>
-           
+                  <a class="nav-item nav-link" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link active" style="color:white;" href="view.php">View Our Products</a>
+                  <div class="nav-item dropdown"></li>
+                    <a class="nav-link dropdown-toggle" style="color:white;"  href="view.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View Our Products
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="nav-item nav-link dropdown-item" href="faq.html">Medicine</a> 
+                      <a class="nav-item nav-link dropdown-item" href="Terms.html">Fruits</a> 
+                      <a class="nav-item nav-link dropdown-item" href="contact.html">Vegetables</a>
+                      <a class="nav-item nav-link dropdown-item" href="contact.html">Meat</a>
+                    
+                          
+                      
+                    </div>
+                  </div>
+        
+                    
                   <a class="nav-item nav-link"  style="color:white;" href="contactus.php">Contact Us </a>
                   <a class="nav-item nav-link" style="color:white;" href="faq.html">FAQ</a>
 
@@ -44,135 +59,105 @@
             </nav>
           
     </header>
-<main>
-<div class="container-fluid mt-5">
 
-<!-- Grid row -->
-<div class="row">
 
-  <!-- Grid column -->
-  <div class="col-md-12 mb-4">
+    
 
-    <div class="container text-center my-3">
-      <h2>Items on Display</h2>
-      <div class="row mx-auto my-auto">
-        <div id="recipeCarousel2" class="carousel slide w-100 " data-ride="carousel">
-          <div class="carousel-inner w-100 vv-3" role="listbox">
-            <div class="carousel-item active">
-              <div class="col-2">
-                <img class="d-block img-fluid"
-                  src="images/dairy2.jpg">
+    <main>
+
+
+    <div class="container">
+    
+        <h1>We have a wide range of products available to you </h1>
+    </div>
+    <!--Meat-->
+    <div class="container" id="medicine">
+    
+    
+    </div>
+
+    <!--Fruit-->
+    <div class="container" id="fruit">
+    
+    
+    </div>
+
+    <!--Vegetables-->
+    <div class="container" id="vegetables">
+    
+    
+    </div>
+
+    <!--Dairy-->
+    <div class="container" id="dairy">
+    
+    
+    
+    </div>
+
+    <!--Meat-->
+    <div class="container" id="meat">
+    
+    
+    </div>
+
+
+
+
+
+    </div>
+      <div class="container text-center">
+          <h1 class="font-weight-light mb-5">Bootstrap 4 Multi Item Carousel Example</h1>
+          <div class="row mx-auto my-auto">
+              <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                  <div class="carousel-inner w-100" role="listbox">
+                      <div class="carousel-item active">
+                          <div class="col-lg-4 col-md-6">
+                              <img class="img-fluid productimage" src="images/medicine.jpg" style="width: 100% object-fit: cover; border: 3px solid #43907f ; border-radius: 50px">
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="col-lg-4 col-md-6">
+                              <img class="img-fluid" src="http://placehold.it/350x180?text=2">
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="col-lg-4 col-md-6">
+                              <img class="img-fluid" src="http://placehold.it/350x180?text=3">
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="col-lg-4 col-md-6">
+                              <img class="img-fluid" src="http://placehold.it/350x180?text=4">
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="col-lg-4 col-md-6">
+                              <img class="img-fluid" src="http://placehold.it/350x180?text=5">
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                          <div class="col-lg-4 col-md-6">
+                              <img class="img-fluid" src="http://placehold.it/350x180?text=6">
+                          </div>
+                      </div>
+                  </div>
+                  <a class="carousel-control-prev  w-auto" href="#myCarousel" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next w-auto" href="#myCarousel" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                  </a>
               </div>
-            </div>
-            <div class="carousel-item">
-              <div class="col-2">
-                <img class="d-block img-fluid"
-                  src="images/fish.jpg">
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="col-2">
-                <img class="d-block img-fluid"
-                  src="images/dairy1.jpg">
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="col-2">
-                <img class="d-block img-fluid"
-                  src="images/freezelinklogo.png">
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="col-2">
-                <img class="d-block img-fluid"
-                  src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg">
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="col-2">
-                <img class="d-block img-fluid"
-                  src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg">
-              </div>
-            </div>
           </div>
-          <a class="carousel-control-prev" href="#recipeCarousel2" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#recipeCarousel2" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
       </div>
-      <h4>Advances one slide at a time</h4>
-    </div>
-
-  </div>
-  <!-- Grid column -->
-
-</div>
-<!-- Grid row -->
-
-
-</div>
-
-
-
-</div>
-    <div class="container text-center">
-        <h1 class="font-weight-light mb-5">Bootstrap 4 Multi Item Carousel Example</h1>
-        <div class="row mx-auto my-auto">
-            <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
-                <div class="carousel-inner w-100" role="listbox">
-                    <div class="carousel-item active">
-                        <div class="col-lg-4 col-md-6">
-                            <img class="img-fluid" src="http://placehold.it/350x180?text=1">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-4 col-md-6">
-                            <img class="img-fluid" src="http://placehold.it/350x180?text=2">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-4 col-md-6">
-                            <img class="img-fluid" src="http://placehold.it/350x180?text=3">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-4 col-md-6">
-                            <img class="img-fluid" src="http://placehold.it/350x180?text=4">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-4 col-md-6">
-                            <img class="img-fluid" src="http://placehold.it/350x180?text=5">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="col-lg-4 col-md-6">
-                            <img class="img-fluid" src="http://placehold.it/350x180?text=6">
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev bg-dark w-auto" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next bg-dark w-auto" href="#myCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
 
 
 
 </main>
 
-      
 
 
         <footer class="panel-footer">
@@ -205,6 +190,8 @@
         </footer>
 
 
+
+        
         <script>
 try {
   fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
@@ -242,7 +229,5 @@ try {
         <script src="js/view.js"></script>
 
 
-
-        
     </body>
 </html>
