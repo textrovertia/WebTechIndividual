@@ -21,6 +21,8 @@
     </head>
     <body> 
        <main>
+
+       <!--Form-->
          <span class="align-items-center">
             <div class="image">
                 <img src="images/freezelinklogo.png" alt="logo" class="center">
@@ -40,7 +42,7 @@
                 </div>
             </div>
           </span>
-            <!-- Button trigger modal -->
+         
            
             <!--Modal for Customer -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -132,12 +134,12 @@ $servername = "localhost";
         die("connection fail: " . $conn->connect_error);
     }
 
-
+    //If login is clicked, and password is right
     if(isset($_POST['login'])){
     $error="";
-        $sql=
+        
    
-        $user = $_POST['email'];
+      
         $pass = $_POST['password1'];
         $result = $conn->query("select * from manager where email = '$user'");
         $row = mysqli_fetch_assoc($result);

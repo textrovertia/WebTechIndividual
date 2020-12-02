@@ -20,42 +20,44 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header>
-            <!--Menubar-->
-            
-              <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-                  <a class="navbar-brand" href="#"><img src="images/freezelinklogo.png" class="logo"> </a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
-                    <div class="navbar-nav" id="right-menu">
-                      <a class="nav-item nav-link active" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
-                      <a class="nav-item nav-link" style="color:white;" href="#">View Our Products</a>
-                      <a class="nav-item nav-link" style="color:white;" href="#">Order Now</a>
-                      <a class="nav-item nav-link"  style="color:white;" href="contact.html">Contact Us </a>
-                      <a class="nav-item nav-link" style="color:white;" href="faq.html">FAQ</a>
-
+      <header>
+        <!--Menubar-->
+        
+          <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+              <a class="navbar-brand" href="#"><img src="images/freezelinklogo.png" class="logo"> </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
+                <div class="navbar-nav" id="right-menu">
+                  <a class="nav-item nav-link" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
+                  <div class="nav-item dropdown"></li>
+                    <a class="nav-link dropdown-toggle" style="color:white;"  href="view.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View Our Products
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="nav-item nav-link dropdown-item" href="view.php#medicine">Medicine</a> 
+                      <a class="nav-item nav-link dropdown-item" href="view.php#fruits">Fruits</a> 
+                      <a class="nav-item nav-link dropdown-item" href="view.php#vegetables">Vegetables</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#meat">Meat</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#dairy">Dairy</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#fish">Fish</a>
+                          
                       
                     </div>
                   </div>
-                </nav>
-               
-                <div class="page-heading about-heading header-text">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="text-content">
-                            <h1 class="hh">Frequently Asked Questions</h1>
-                            <form>
-                                <input type="text" name="search" class="search" placeholder="Search here">
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-        </header>
+        
+                    
+                  <a class="nav-item nav-link active"  style="color:white;" href="contactus.php">Contact Us </a>
+                  <a class="nav-item nav-link" style="color:white;" href="faq.html">FAQ</a>
+
+
+                  
+                </div>
+              </div>
+            </nav>
+          
+    </header>
 
         <main >
             <div class="container faq1">

@@ -52,7 +52,7 @@ $servername = "localhost";
             <a href="#cars">Warehouse</a>
             <a href="admininventory.php">Inventory</a>
             <a href="adminemployee.php">Employees</a>
-            <a href="adminpartners.php">Partners</a>
+            <a href="adminpartner.php">Partners</a>
             <a href="admincontact.php">Contact and Messages </a>
     </div>
 
@@ -128,18 +128,21 @@ $servername = "localhost";
                         
                         <table>
                             <tr>
-                                <th>Organisation Name:</th>
-                                <th><input type="text" required placeholder="Enter org name here" name="orgname"></th>
+                                <td>Organisation Name:</td>
+                                <td><input  type="text" required placeholder="Enter organisation name here" class="form-control" name="orgname"></td>
+                               
 
                             </tr>
                             <br>
                             <tr>
-                                <th>Equipment Donated:</th>
-                                <th><input type="text" required placeholder="Enter equipment here" name="orgname"></th>
+                                <td>Equipment Donated:</td>
+                                <td><input  type="text"  required placeholder="Enter equipment here"  class="form-control" name="equipment"></td>
+                               
                             </tr>
+
                             <tr>
-                                <th> Company Logo</th>
-                                <th><input  type="file" name="fileToUpload" id="fileToUpload" required> </th>
+                                <td> Company Logo:</td>
+                                <td><input  type="file" name="fileToUpload" id="fileToUpload" required> </td>
                             </tr>
 
                         </table>

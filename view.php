@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link id="theme" rel="stylesheet" href="css/viewlight1.css">
+        <link id="theme" rel="stylesheet" href="css/viewlight.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
@@ -32,17 +32,17 @@
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
                 <div class="navbar-nav" id="right-menu">
                   <a class="nav-item nav-link" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link active" style="color:white;" href="view.php">View Our Products</a>
                   <div class="nav-item dropdown"></li>
                     <a class="nav-link dropdown-toggle" style="color:white;"  href="view.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         View Our Products
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="nav-item nav-link dropdown-item" href="faq.html">Medicine</a> 
-                      <a class="nav-item nav-link dropdown-item" href="Terms.html">Fruits</a> 
-                      <a class="nav-item nav-link dropdown-item" href="contact.html">Vegetables</a>
-                      <a class="nav-item nav-link dropdown-item" href="contact.html">Meat</a>
-                    
+                      <a class="nav-item nav-link dropdown-item" href="view.php#medicine">Medicine</a> 
+                      <a class="nav-item nav-link dropdown-item" href="view.php#fruits">Fruits</a> 
+                      <a class="nav-item nav-link dropdown-item" href="view.php#vegetables">Vegetables</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#meat">Meat</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#dairy">Dairy</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#fish">Fish</a>
                           
                       
                     </div>
@@ -72,24 +72,30 @@
     </div>
     <!--Meat-->
     <div class="container" id="medicine">
+    <h2>Medicine</h2>
     
+    
+    </div>
     
     </div>
 
     <!--Fruit-->
-    <div class="container" id="fruit">
+    <div class="container" id="fruits">
+      <h2>Fruit</h2>
     
     
     </div>
 
     <!--Vegetables-->
     <div class="container" id="vegetables">
+      <h2>Vegetables</h2>
     
     
     </div>
 
     <!--Dairy-->
     <div class="container" id="dairy">
+      <h2>Dairy</h2>
     
     
     
@@ -97,9 +103,14 @@
 
     <!--Meat-->
     <div class="container" id="meat">
+      <h2>Meat</h2>
     
     
     </div>
+
+   <div class="container" id="fish">
+     <h2>Fish</h2>
+   </div>
 
 
 
@@ -113,27 +124,30 @@
                   <div class="carousel-inner w-100" role="listbox">
                       <div class="carousel-item active">
                           <div class="col-lg-4 col-md-6">
-                              <img class="img-fluid productimage" src="images/medicine.jpg" style="width: 100% object-fit: cover; border: 3px solid #43907f ; border-radius: 50px">
+                              <img class="img-fluid productimage" src="images/medicine.jpg" >
+                              <p>Medicine</p>
                           </div>
                       </div>
                       <div class="carousel-item">
                           <div class="col-lg-4 col-md-6">
-                              <img class="img-fluid" src="http://placehold.it/350x180?text=2">
+                              <img class="img-fluid productimage" src="images/fish.jpg">
+                              <p>Fish</p>
                           </div>
                       </div>
                       <div class="carousel-item">
                           <div class="col-lg-4 col-md-6">
-                              <img class="img-fluid" src="http://placehold.it/350x180?text=3">
+                              <img class="img-fluid productimage" src="images/fruits.jpg">
+                              <p>Meat</p>
                           </div>
                       </div>
                       <div class="carousel-item">
                           <div class="col-lg-4 col-md-6">
-                              <img class="img-fluid" src="http://placehold.it/350x180?text=4">
+                              <img class="img-fluid productimage" src="images/dairy2.jpg">
                           </div>
                       </div>
                       <div class="carousel-item">
                           <div class="col-lg-4 col-md-6">
-                              <img class="img-fluid" src="http://placehold.it/350x180?text=5">
+                              <img class="img-fluid productimage" src="http://placehold.it/350x180?text=5">
                           </div>
                       </div>
                       <div class="carousel-item">

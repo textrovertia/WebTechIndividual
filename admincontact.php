@@ -13,11 +13,10 @@ $servername = "localhost";
     //Check connection
     if ($conn->connect_error){
         die("Connection failed:".$conn->connect_error);
-    }else{
-      echo "Connection successful";
-    };
-    $sql = "SELECT * FROM inventory";
+    }
+    $sql = "SELECT * FROM contactus";
     $result = $conn->query($sql);
+   
   
 
 ?>
@@ -26,7 +25,7 @@ $servername = "localhost";
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/admincontact.css" >
+    <link rel="stylesheet" href="css/adminpartner.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -50,11 +49,13 @@ $servername = "localhost";
     <div class="sidenav">
             <a href="#orders">Customer</a>
             <a href="#cars">Warehouse</a>
-            <a href="#clients">Inventory</a>
-            <a href="admincontact.php">Employees</a>
-            <a href="adminpartner.php">Partners</a>
-            <a href="contactinfo.php">Contact and Messages </a>
+            <a href="admininventory.php">Inventory</a>
+            <a href="adminemployee.php">Employees</a>
+            <a href="adminpartners.php">Partners</a>
+            <a href="admincontact.php">Contact and Messages </a>
     </div>
+
+
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         
@@ -80,7 +81,7 @@ $servername = "localhost";
           if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {    
-              $num=1
+              
           ?>		
 
             <tr id="contacting2">
@@ -93,7 +94,11 @@ $servername = "localhost";
             </tr>
 	  
         <?php	
-          } }
+          } }else{
+            echo "Hi";
+            echo $result;
+            echo $result ->num_rows;
+          }
         ?>
 	
          
@@ -106,6 +111,8 @@ $servername = "localhost";
 
 
     </main>
+ 
+ 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <script scr="js/jquery-3.5.1.js"></script>
     <script src="js/admincontactus.js"></script>
@@ -115,3 +122,7 @@ $servername = "localhost";
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html> 
+
+
+
+

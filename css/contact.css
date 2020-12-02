@@ -159,6 +159,11 @@ form label{
     height: auto;
 }
 
+/*Form validation*/
+#emailHelp{
+    color:black !important;
+}
+
 
 /*Footer*/ 
 .panel-footer{

@@ -23,7 +23,8 @@ $('.carousel .carousel-item').each(function() {
 });
 
 
-//webmode=localStorage.getItem("webmode");
+//Dark Mode
+webmode=localStorage.getItem("webmode");
 console.log(webmode);
 
 document.addEventListener('DOMContentLoaded', () => {

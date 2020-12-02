@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="js/contact.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -21,32 +22,45 @@
     
       </head>
 
-    <body>
+    <body>  
         <header>
-            <!--Menubar-->
-            
-              
-            <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-                <a class="navbar-brand" href="#"><img src="images/freezelinklogo.png" class="logo"> </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
-                  <div class="navbar-nav" id="right-menu">
-                    <a class="nav-item nav-link active" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" style="color:white;" href="view.php">View Our Products</a>
-                    <a class="nav-item nav-link"  style="color:white;" href="contact.html">Contact Us </a>
-                    <a class="nav-item nav-link" style="color:white;" href="faq.html">FAQ</a>
-
-
-                    
+        <!--Menubar-->
+        
+          <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+              <a class="navbar-brand" href="#"><img src="images/freezelinklogo.png" class="logo"> </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup" >
+                <div class="navbar-nav" id="right-menu">
+                  <a class="nav-item nav-link" style="color:white;" href="home.html" >Home <span class="sr-only">(current)</span></a>
+                  <div class="nav-item dropdown"></li>
+                    <a class="nav-link dropdown-toggle" style="color:white;"  href="view.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View Our Products
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="nav-item nav-link dropdown-item" href="view.php#medicine">Medicine</a> 
+                      <a class="nav-item nav-link dropdown-item" href="view.php#fruits">Fruits</a> 
+                      <a class="nav-item nav-link dropdown-item" href="view.php#vegetables">Vegetables</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#meat">Meat</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#dairy">Dairy</a>
+                      <a class="nav-item nav-link dropdown-item" href="view.php#fish">Fish</a>
+                          
+                      
+                    </div>
                   </div>
+        
+                    
+                  <a class="nav-item nav-link active"  style="color:white;" href="contactus.php">Contact Us </a>
+                  <a class="nav-item nav-link" style="color:white;" href="faq.html">FAQ</a>
+
+
+                  
                 </div>
-              </nav>
-            
-            
-            
-        </header>
+              </div>
+            </nav>
+          
+    </header>
         <main>
 
              <div class="container"> 
@@ -67,7 +81,9 @@
                         <input type="text" required placeholder="First Name" name="fname" class="naming firstname">
                         <input type="text" required placeholder="Last Name" name="lname" class="naming">
                         <label>Email</label>
-                        <input type="text" required placeholder="Email" name="email">
+                        <input type="text" required placeholder="Email" name="email" id="email">
+                        <br>
+                        <p id="emailHelp" style="color:red;"></p>
                         <label>Message</label><br><br>
                         <textarea type="text" style="width:20em;" required placeholder="Message" name="messages" class="message"></textarea>
                         <input type="submit" required placeholder="Submit" name="submitrequest" id="submit">
@@ -109,38 +125,65 @@
           </div>
 
 <script>
-  var form=document.getElementById("form");
-  var first=form.fname.value
-  console.log("first")
+ 
+
+
+// Check email validity when field loses focus
+email=document.getElementById("email");
+console.log(email)
+document.getElementById("email").addEventListener("focus", e => {
+console.log("hi")
+  // Match a string of the form xxx@yyy.zzz
+const emailRegex = /.+@.+\..+/;
+
+let validityMessage = "";
+if (!emailRegex.test(e.target.value)) {
+    validityMessage = "Invalid address";
+    
+    email.style.border= "5px";
+    email.style.borderColor="blue";
+    console.log("Yes")
+}else{
+  validityMessage = "Correct address";
+  console.log("No")
+}
+document.getElementById("emailHelp").textContent = validityMessage;
+document.getElementById("emailHelp").color='red';
+});
 
 </script>
 </body>
 </html>
 
 <?php
-    $firstname=$_POST["fname"];
-    $lastname=$_POST["lname"];
-    $email=$_POST["email"];
-    $messages=$_POST["messages"];
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "freezelink";
+   
 
+ 
+ 
+   if(isset($_POST["submitrequest"])){
 
-
-    //Create connection
-    $conn = new mysqli($servername, $username, $password,$dbname);
-    
-
-    //Check connection
-    if ($conn->connect_error){
-        die("Connection failed:".$conn->connect_error);
-    }
-    
-    
-    $sql="INSERT INTO contactus(first_name, last_name, email, messages) VALUES('$firstname', '$lastname','$email', '$messages')";
-
+      $firstname=$_POST["fname"];
+      $lastname=$_POST["lname"];
+      $email=$_POST["email"];
+      $messages=$_POST["messages"];
+      
+      $servername = "localhost";
+      $username = "root";
+      $password = "";
+      $dbname = "freezelink";
+      
+     //Create connection
+     $conn = new mysqli($servername, $username, $password,$dbname);
+      
+  
+     //Check connection
+     if ($conn->connect_error){
+         die("Connection failed:".$conn->connect_error);
+     }
+ 
+  
+      
+      $sql="INSERT INTO contactus(first_name, last_name, email, messages) VALUES('$firstname', '$lastname','$email', '$messages')";
     if (empty($firstname) || empty($lastname) ){
       echo '<script>alert("Please fill the form")</script>';
       preventDefault();
@@ -148,7 +191,11 @@
       
         if ($conn->query($sql)===true){
           echo '<script>
-          alert("Message received! Thank you for using Freezelink Limited! Pleasure to serve you")
+          swal({
+            title: "Message sent",
+            text: "You successfully sent this message.",
+            icon: "success",
+          }); 
           </script>';
           
       }else{
@@ -156,6 +203,7 @@
       }
     
     }
+  };
 
     
 ?>

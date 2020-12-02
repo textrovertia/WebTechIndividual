@@ -1,7 +1,7 @@
-
 *{
     box-sizing: border-box;
 }
+
 
 body{
     background-image: linear-gradient(to bottom right, whitesmoke, whitesmoke , #43907f);
@@ -56,55 +56,8 @@ ul{
     height: 50px;
 }
 
-.btn{
-    color: white;
-}
-
-
-.btn2{
-    color:black;
-}
-.myleft:hover, .myleft:visited,.btn:active {
-    color:#43907f;
-}
-
-.card-header{
-    background-color: #222;
-    color:#43907f;
-   
-
-}
-
-.cardheader2{
-    background-color:whitesmoke;
-}
-
-.card-body{
-    background-color: rgba(0, 0, 0, 0.253);
-}
-
-.page-heading {
-	padding: 210px 0px 180px 0px;
-	text-align: center;
-	background-position: center center;
-	background-repeat: no-repeat;
-    background-size: cover;
-    
-}
-p{
-    padding:2rem;
-    font-size: 2rem;
-    font-family: 'Lato', sans-serif;
-}
-.hh{
-    font-size: 7em;
-    color:white;
-}
 
 /*Body*/
-.search{
-    color:black;
-}
 .darker{
     float: right;
     border-radius: 40px;
@@ -122,19 +75,51 @@ h2{
     color:#43907f;
 }
 
-.plus{
+.describe{
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.container{
+    text-align: center;
+}
+
+.homeimage{
+    max-width: 40%;
+    height:auto;
+    width: 360px;
+    margin: 0 auto 15px;
+
+}
+hr{
+    background-color: black;
+}
+
+.design{
+    line-height: 2em;
+}
+
+
+button{
     float: right;
+    margin-right: 15px;
+    
+}
+
+.productimage{
+    width: 100%;
+    object-fit: cover;
+    border: 3px solid  #43907f ;
+    border-radius: 50px;;
 }
 
 
-/*Accordion*/
-.myleft{
-    float:left;
+
+.productimage:hover{
+    box-shadow: 0 0 .25em .25em rgba(0, 0, 0, 0.25);  
+    transform:scale(1.1,1.1);
 }
 
-.myright{
-    float:right;
-}
 
 /*Footer*/ 
 .panel-footer{
@@ -147,21 +132,18 @@ h2{
     margin-bottom:10px;
 }
 
+
+
 .middle:hover{
     color: #31a8bd;
 }
-@media screen and (max-width: 574px) {
-    .partner{
-        width: 360px;
-        margin: 0 auto 15px;
-    }
-
-    .myfooter{
-        width:50%;
-    }
 
 
-  }
+
+
+
+
+
 
 
 
@@ -173,50 +155,53 @@ h2{
 /* medium - display 2 */ 
 @media (min-width: 768px) {
 
-  .carousel-inner .carousel-item-right.active,
-  .carousel-inner .carousel-item-next {
-      transform: translateX(50%);
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(50%);
+    }
+  
+    .carousel-inner .carousel-item-left.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-50%);
+    }
   }
-
-  .carousel-inner .carousel-item-left.active,
+  
+   /*large - display 3 */
+  @media (min-width: 992px) {
+  
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(33%);
+    }
+  
+    .carousel-inner .carousel-item-left.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-33%);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-inner .carousel-item>div {
+        display: none;
+    }
+  
+    .carousel-inner .carousel-item>div:first-child {
+        display: block;
+    }
+  }
+  
+  .carousel-inner .carousel-item.active,
+  .carousel-inner .carousel-item-next,
   .carousel-inner .carousel-item-prev {
-      transform: translateX(-50%);
+    display: flex;
   }
-}
-
- /*large - display 3 */
-@media (min-width: 992px) {
-
-  .carousel-inner .carousel-item-right.active,
-  .carousel-inner .carousel-item-next {
-      transform: translateX(33%);
+  
+  .carousel-inner .carousel-item-right,
+  .carousel-inner .carousel-item-left {
+    transform: translateX(0);
   }
-
-  .carousel-inner .carousel-item-left.active,
-  .carousel-inner .carousel-item-prev {
-      transform: translateX(-33%);
-  }
-}
-
-@media (max-width: 768px) {
-  .carousel-inner .carousel-item>div {
-      display: none;
-  }
-
-  .carousel-inner .carousel-item>div:first-child {
-      display: block;
-  }
-}
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-  display: flex;
-}
-
-.carousel-inner .carousel-item-right,
-.carousel-inner .carousel-item-left {
-  transform: translateX(0);
-}
+  
+  
+  
 
 

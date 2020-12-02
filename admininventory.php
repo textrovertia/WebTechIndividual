@@ -16,7 +16,7 @@ $servername = "localhost";
     }else{
       echo "Connection successful";
     };
-    $sql = "SELECT * FROM contactus";
+    $sql = "SELECT * FROM inventory";
     $result = $conn->query($sql);
   
 
@@ -26,7 +26,7 @@ $servername = "localhost";
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/admincontact.css" >
+    <link rel="stylesheet" href="css/admininventory.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -50,59 +50,125 @@ $servername = "localhost";
     <div class="sidenav">
             <a href="#orders">Customer</a>
             <a href="#cars">Warehouse</a>
-            <a href="#clients">Inventory</a>
-            <a href="#contact">Employees</a>
+            <a href="admininventory.php">Inventory</a>
+            <a href="adminemployee.php">Employees</a>
             <a href="adminpartner.php">Partners</a>
-            <a href="contactinfo.php">Contact and Messages </a>
+            <a href="admincontact.php">Contact and Messages </a>
     </div>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         
     <div id="orders">
-      <h3>Contact Us</h3>
+      <h3>Partners</h3>
       <hr>
-    
-    <div class="table-responsive">
-      <table class="table table-dark">
-  
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Messages</th>
-          </tr>
-        </thead>
-        <tbody id="contacting">
-        <?php
+
+
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Number of Partner Organisations</h5>
+               
+               
+                <p class="card-text">Equipment Donated:</p>
+                
+               
+          
+            </div>
+            </div>
+        </div>
+
+
+      <?php
 
           if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {    
               $num=1
-          ?>		
+          ?>		 
+  
+      <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $row["organisation_name"]; ?></h5>
+               
+                <p class="card-text"> <?//php echo $row["partner_logo"]; ?></p>
+                <p class="card-text">Equipment Donated:</p>
+                <p class="card-text"><?php echo $row["equipment_donated"]?> </p>
+                <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Edit
+                      </button>
+                <a href="#" class="btn btn-secondary" onclick="alert('Do you want to delete this?')">Delete</a>
+          
+            </div>
+            </div>
+        </div>
 
-            <tr id="contacting2">
-                <td><?php echo $row["messageid"];  ?></td>
-                <td><?php echo $row["first_name"]; ?></td>
-                <td><?php echo $row["last_name"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
-                <td><?php echo $row["messages"]; ?></td>
-      	
-            </tr>
-	  
+         
         <?php	
           } }
         ?>
-	
-         
-        </tbody>
-            
-      </table>
+    
+
+    
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Edit Partner Information</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                      <form id="partnerform" method="POST" action="upload.php" enctype="multipart/form-data" >
+                        <p>Please enter the information below</p>
+                        
+                        <table>
+                            <tr>
+                                <th>Organisation Name:</th>
+                                <th><input type="text" required placeholder="Enter org name here" name="orgname"></th>
+
+                            </tr>
+                            <br>
+                            <tr>
+                                <th>Equipment Donated:</th>
+                                <th><input type="text" required placeholder="Enter equipment here" name="orgname"></th>
+                            </tr>
+                            <tr>
+                                <th> Company Logo</th>
+                                <th><input  type="file" name="fileToUpload" id="fileToUpload" required> </th>
+                            </tr>
+
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <a type="submit" onclick="getdisplaymode()" href="home.html" type="button" id="togglemode" class="btn btn-primary">Update</a>
+                          </div>
+                      </form>
+                      <p id="result"></p>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
     </div>
 </div>
 
+
+
+        <a href="#" class="btn btn-secondary">Add Car</a>
+
+
+
+
+        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+  <input placeholder="Select date" type="text" id="example" class="form-control">
+  <label for="example">Try me...</label>
+  <i class="fas fa-calendar input-prefix" tabindex=0></i>
+</div>
 
 
     </main>
