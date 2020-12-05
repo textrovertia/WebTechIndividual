@@ -91,10 +91,21 @@
                     <div class="modal-body">
                     
                       <form id="myform" method="POST">
-                        <p>Kindly provide your employee login details below</p>
-                        <p>Email: <input type="text" name="email"/></p>
-                        <p>Password: <input type="password" name="password1"></p>
-                      
+                      <p>Kindly provide your employee login details below</p>
+                        <table>
+                            <tr>
+                                    <td> Email: </td>
+                                    <td><input  type="text" required placeholder="Enter email name here" class="form-control" name="email"></td>
+                            </tr>
+                            <br>
+                            <br>
+                            <tr>
+                                    <td> Password: </td>
+                                    <td><input  type="password" required placeholder="Enter password here" class="form-control" name="password1"></td>
+                            </tr>
+                            
+                        </table>
+                       
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
                             <input type="submit" value="Login" name="login" class="btn btn-primary">
@@ -137,9 +148,21 @@ $servername = "localhost";
     //If login is clicked, and password is right
     if(isset($_POST['login'])){
     $error="";
+    echo '
+            <script> 
+                 
+            
+              swal({
+                      title: "Wrong password",
+                      text: "You entered the wrong password. You have four more attempts",
+                      icon: "error",
+                    }); 
+           
+            </script>';
         
    
-      
+
+        $user=$_POST["email"];
         $pass = $_POST['password1'];
         $result = $conn->query("select * from manager where email = '$user'");
         $row = mysqli_fetch_assoc($result);
@@ -149,7 +172,7 @@ $servername = "localhost";
        if($result->num_rows > 0)
        {
             $_SESSION["id"] = $row['id'];
-            $_SESSION["name"] = $row['name'];
+            $_SESSION["email"] = $row['email'];
            if ($auth===TRUE){
             
           
@@ -159,14 +182,13 @@ $servername = "localhost";
             echo '
             <script> 
                  
-            function sweet(){
+            
               swal({
                       title: "Wrong password",
                       text: "You entered the wrong password. You have four more attempts",
                       icon: "error",
                     }); 
-             }
-                  sweet() 
+           
             </script>';
            }
            

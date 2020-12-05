@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Grassroots Car Rental </title>
+        <title>Contact Us</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -78,7 +78,7 @@
                     <form method="POST" action="contactus.php" id="form">
                         <label>Name</label><br>
                     
-                        <input type="text" required placeholder="First Name" name="fname" class="naming firstname">
+                        <input type="text" placeholder="First Name" name="fname" class="naming firstname">
                         <input type="text" required placeholder="Last Name" name="lname" class="naming">
                         <label>Email</label>
                         <input type="text" required placeholder="Email" name="email" id="email">
@@ -185,7 +185,14 @@ document.getElementById("emailHelp").color='red';
       
       $sql="INSERT INTO contactus(first_name, last_name, email, messages) VALUES('$firstname', '$lastname','$email', '$messages')";
     if (empty($firstname) || empty($lastname) ){
-      echo '<script>alert("Please fill the form")</script>';
+
+        echo '<script>
+        swal({
+          title: "Warning",
+          text: "Fill all fields of this form",
+          icon: "warning",
+        }); 
+        </script>';
       preventDefault();
     }else{
       

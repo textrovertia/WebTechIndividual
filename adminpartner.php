@@ -26,17 +26,21 @@ $servername = "localhost";
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       
     <link rel="stylesheet" href="css/adminpartner.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+    <!--Navbar Top-->
     <nav class="navbar navbar-dark fixed-top bg-custom flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Freezelink Limited </a>
       
-        <input type="text" id="searchbar" class="form-control form-control-primary w-100" placeholder="Search..." >
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" id="searchbar" class="form-control form-control-primary" placeholder="Search..." >
+
         <span><img src="images/whatwedo.png" alt="User Image" class="userimage"></span>
         <ul class="navbar-nav px-3">
         
@@ -47,37 +51,39 @@ $servername = "localhost";
         </ul>
     </nav>
 
-    <div class="sidenav">
-            <a href="#orders">Customer</a>
-            <a href="#cars">Warehouse</a>
-            <a href="admininventory.php">Inventory</a>
-            <a href="adminemployee.php">Employees</a>
-            <a href="adminpartner.php">Partners</a>
-            <a href="admincontact.php">Contact and Messages </a>
+    <!--Navbar Side-->
+    <div class="wrapper">
+     <div class="bg-light border-right sidenav" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+      
+            <a href="#orders" class="menu-item"><span class="icon" style="margin-right:5px;"><i class="fas fa-user"></i></span>Customer</a>
+            <a href="#cars"><span class="icon" style="margin-right:5px;"><i class="fas fa-warehouse"></i></span>Warehouse</a>
+            <a href="admininventory.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-boxes"></i></span>Inventory</a>
+            <a href="adminemployee.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-user-friends"></i></span>Employees</a>
+            <a href="adminpartner.php"><span class="icon"style="margin-right:5px;"><i class="fas fa-handshake"></i></span>Partners</a>
+            <a href="admincontact.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-address-book"></i></span>Messages </a>
+      </div>
+    </div>
     </div>
 
+    <!--Body-->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         
     <div id="orders">
       <h3>Partners</h3>
       <hr>
-
-
-      <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
+      <div class="row partnerscard">
+        <div class="col-sm-4  mycard">
+          <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Number of Partner Organisations</h5>
-               
-               
-                <p class="card-text">Equipment Donated:</p>
-                
-               
-          
+              <h4 class="card-title">Number of Partner Organisations</h4>
+        
+              <h1 class="card-text"><?php ?></h1>
+            
             </div>
-            </div>
+          </div>
         </div>
-
+        
 
       <?php
 
@@ -87,30 +93,28 @@ $servername = "localhost";
               $num=1
           ?>		 
 
-      <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $row["organisation_name"]; ?></h5>
-               
-                <p class="card-text"> <?//php echo $row["partner_logo"]; ?></p>
-                <p class="card-text">Equipment Donated:</p>
-                <p class="card-text"><?php echo $row["equipment_donated"]?> </p>
-                <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        Edit
-                      </button>
-                <a href="#" class="btn btn-secondary" onclick="alert('Do you want to delete this?')">Delete</a>
-          
+      <!--Card to show Partner-->
+        <div class="container">
+              <div class="row">
+              
+            <div class="card mycard" style="width: 18rem;">
+                  <img class="card-img-top" src="images/fish.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title"><?php echo $row["organisation_name"]; ?></h5>
+                    <p class="card-text">Equipment Donated:</p>
+                    <p class="card-text"><?php echo $row["equipment_donated"]?></p>
+                    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
+                    <button type="button" class="btn btn-danger" onclick="swal()">Delete</button>
+              </div>
             </div>
-            </div>
+              
+              </div>
         </div>
-
-         
         <?php	
           } }
         ?>
     
-
+<!--Form to edit data-->
     
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -164,14 +168,17 @@ $servername = "localhost";
 
         <a href="#" class="btn btn-secondary">Add Car</a>
 
+      
+
 
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
-    <script scr="js/jquery-3.5.1.js"></script>
     <script src="js/admincontactus.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/95e3cf507f.js"></script>
+    
 </body>
 </html> 

@@ -10,7 +10,6 @@ body {
   
   /*search bar*/
   .form-control-primary {
-    margin: 10px;
     opacity: 0.2;
     border-radius: 2px;
     
@@ -53,4 +52,9 @@ body {
 
 #orders{
     margin-top: 70px;
+}
+
+/*Partners Card*/
+.mycard{
+  display: inline-flex;
 }

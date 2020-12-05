@@ -26,6 +26,8 @@ $servername = "localhost";
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/adminpartner.css" >
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -51,7 +53,7 @@ $servername = "localhost";
             <a href="#cars">Warehouse</a>
             <a href="admininventory.php">Inventory</a>
             <a href="adminemployee.php">Employees</a>
-            <a href="adminpartners.php">Partners</a>
+            <a href="adminpartner.php">Partners</a>
             <a href="admincontact.php">Contact and Messages </a>
     </div>
 

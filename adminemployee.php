@@ -7,6 +7,8 @@ $servername = "localhost";
 
 
 
+     echo 'SELECT COUNT("employee_id") FROM employee'; 
+
     //Create connection
     $conn = new mysqli($servername, $username, $password,$dbname);
     
@@ -15,13 +17,11 @@ $servername = "localhost";
     if ($conn->connect_error){
         die("Connection failed:".$conn->connect_error);
     }
-    $sql = "SELECT * FROM employee";
-    $result = $conn->query($sql);
+    $sql1 = "SELECT * FROM employee";
+    $result = $conn->query($sql1);
 
-
-    $fname = $_POST['fname'];
-echo $fname;
-
+   $sql2='SELECT COUNT("employee_id") FROM employee'; 
+   $result2=$conn->query($sql2);
 
 
 
@@ -34,6 +34,7 @@ echo $fname;
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/adminemployee.css" >
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -43,12 +44,11 @@ echo $fname;
 </head>
 <body>
 
-<!--
+
     <nav class="navbar navbar-dark fixed-top bg-custom flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Freezelink Limited </a>
       
         <input type="text" id="searchbar" class="form-control form-control-primary w-100" placeholder="Search..." >
-        <i class="fa fa-search" aria-hidden="true"></i>
         <span><img src="images/whatwedo.png" alt="User Image" class="userimage"></span>
         <ul class="navbar-nav px-3">
         
@@ -58,16 +58,33 @@ echo $fname;
         </li>
         </ul>
     </nav>
--->
 
-    <div class="sidenav">
+
+     <!-- Sidebar -->
+     <div class="wrapper">
+     <div class="bg-light border-right sidenav" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+      
+            <a href="#orders" class="menu-item"><span class="icon" style="margin-right:5px;"><i class="fas fa-user"></i></span>Customer</a>
+            <a href="#cars"><span class="icon" style="margin-right:5px;"><i class="fas fa-warehouse"></i></span>Warehouse</a>
+            <a href="admininventory.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-boxes"></i></span>Inventory</a>
+            <a href="adminemployee.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-user-friends"></i></span>Employees</a>
+            <a href="adminpartner.php"><span class="icon"style="margin-right:5px;"><i class="fas fa-handshake"></i></span>Partners</a>
+            <a href="admincontact.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-address-book"></i></span>Messages </a>
+      </div>
+    </div>
+    </div>
+
+
+
+   <!--  <div class="sidenav">
             <a href="#orders">Customer</a>
             <a href="#cars">Warehouse</a>
-            <a href="admininventory.php">Inventory</a>
+            <a href="admininventory.php"><i class="fas fa-users"></i>Inventory</a>
             <a href="adminemployee.php">Employees</a>
             <a href="adminpartners.php">Partners</a>
             <a href="admincontact.php">Contact and Messages </a>
-    </div>
+    </div> -->
 
 
 
@@ -76,9 +93,20 @@ echo $fname;
     <div id="orders">
       <h3>Employees</h3>
       <hr>
+
+      <div class="row">
+  <div class="col-sm-4  mycard">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Number of Employees</h4>
+        <h1 class="card-text"><?php ?></h1>
+      
+      </div>
+    </div>
+  </div>
     
     <div class="table-responsive">
-      <table class="table table-dark">
+      <table class="table table-striped table-bordered">
   
         <thead>
           <tr>
@@ -88,6 +116,7 @@ echo $fname;
             <th scope="col">Date Employed</th>
             <th scope="col">Department</th>
             <th scope="col">Email</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody id="contacting">
@@ -106,6 +135,10 @@ echo $fname;
                 <td><?php echo $row["date_employed"]; ?></td>
                 <td><?php echo $row["department"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
+                <td>
+                <a href="edit-users.php?editId=<?php echo $val['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
+                <a href="delete.php?delId=<?php echo $val['id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
+            </td>
       	
             </tr>
 	  
@@ -120,7 +153,7 @@ echo $fname;
     </div>
 
     <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        Edit
+                       Add Employee
                       </button>
 </div>
 
@@ -208,46 +241,47 @@ echo $fname;
     <?php
 
 
+if (isset($_POST['submit'])){
+
+  
+  $fname = $_POST['fname'];
+  $lname=$_POST['lname'];
+  $date=$_POST['date_e'];
+  $dept=$_POST['dept'];
+  $email=$_POST['email'];
 
 
-    $fname = $_POST['fname'];
-    $lname=$_POST['lname'];
-    $date=$_POST['date_e'];
-    $dept=$_POST['dept'];
-    $email=$_POST['email'];
+  echo $fname;
+  echo $lname;
+  echo $date;
+  echo $dept;
+  echo $email;
+        $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
+      if ($conn->query($sql)===true){
+          
+          echo '<script>
+          swal({
+              title: "Success!",
+              text: "You successfully added an employee to the database",
+              icon: "success",
+            }); 
+          
+          </script>';
+          
+      }else{
+          echo '<script>
+          swal({
+              title: "Wrong password",
+              text: "You entered the wrong password. You have four more attempts",
+              icon: "error",
+            }); 
+     }
+          
+          </script>';
+          
+      };
 
-
-    echo $fname;
-    echo $lname;
-    echo $date;
-    echo $dept;
-    echo $email;
-    "INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date)";
-          $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date)";
-        if ($conn->query($sql)===true){
-            echo "Hi";
-            echo '<script>
-            swal({
-                title: "Wrong password",
-                text: "You entered the wrong password. You have four more attempts",
-                icon: "success",
-              }); 
-       }
-            
-            </script>';
-            
-        }else{
-            echo '<script>
-            swal({
-                title: "Wrong password",
-                text: "You entered the wrong password. You have four more attempts",
-                icon: "error",
-              }); 
-       }
-            
-            </script>';
-            
-        };
+}
 
 
 
@@ -264,7 +298,9 @@ echo $fname;
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+ 
 
+<script src="https://kit.fontawesome.com/95e3cf507f.js"></script>
     
    
 </body>

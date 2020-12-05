@@ -10,3 +10,12 @@ $(document).ready(function(){
     })
 })
 
+
+
+function swal(){
+    swal({
+          title: "Success!",
+          text: "You successfully added an employee to the database",
+          icon: "success",
+        }); 
+  }

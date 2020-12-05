@@ -72,7 +72,11 @@ button:hover{
 form{
     text-align: center;
 }
+/*Form Details*/
 
+tr{
+    margin-bottom: 5px;
+}
 
 /*
 
