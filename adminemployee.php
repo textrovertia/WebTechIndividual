@@ -20,9 +20,17 @@ $servername = "localhost";
     $sql1 = "SELECT * FROM employee";
     $result = $conn->query($sql1);
 
-   $sql2='SELECT COUNT("employee_id") FROM employee'; 
-   $result2=$conn->query($sql2);
+  
+$sql1="SELECT * FROM employee";
 
+if ($result2=mysqli_query($con,$sql1))
+  {
+  // Return the number of rows in result set
+  $rowcount=mysqli_num_rows($result2);
+  printf("Result set has %d rows.\n",$rowcount);
+  // Free result set
+  mysqli_free_result($result2);
+  }
 
 
    
@@ -41,6 +49,25 @@ $servername = "localhost";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        color: #222;
+        display: block;
+      }
+
+      .sidenav a:hover{
+        color:#43907f;;
+      }
+
+      .icon{
+        margin-right:5px;
+      }
+
+    </style>
+
 </head>
 <body>
 
@@ -65,26 +92,16 @@ $servername = "localhost";
      <div class="bg-light border-right sidenav" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
       
-            <a href="#orders" class="menu-item"><span class="icon" style="margin-right:5px;"><i class="fas fa-user"></i></span>Customer</a>
-            <a href="#cars"><span class="icon" style="margin-right:5px;"><i class="fas fa-warehouse"></i></span>Warehouse</a>
-            <a href="admininventory.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-boxes"></i></span>Inventory</a>
-            <a href="adminemployee.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-user-friends"></i></span>Employees</a>
-            <a href="adminpartner.php"><span class="icon"style="margin-right:5px;"><i class="fas fa-handshake"></i></span>Partners</a>
-            <a href="admincontact.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-address-book"></i></span>Messages </a>
+            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Customer</a>
+            <a href="#cars"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
+            <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
+            <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
+            <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a>
+            <a href="admincontact.php"><span class="icon"><i class="fas fa-address-book"></i></span>Messages </a>
       </div>
     </div>
     </div>
 
-
-
-   <!--  <div class="sidenav">
-            <a href="#orders">Customer</a>
-            <a href="#cars">Warehouse</a>
-            <a href="admininventory.php"><i class="fas fa-users"></i>Inventory</a>
-            <a href="adminemployee.php">Employees</a>
-            <a href="adminpartners.php">Partners</a>
-            <a href="admincontact.php">Contact and Messages </a>
-    </div> -->
 
 
 
@@ -99,7 +116,7 @@ $servername = "localhost";
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Number of Employees</h4>
-        <h1 class="card-text"><?php ?></h1>
+        <h1 class="card-text"><?php echo $result2; ?></h1>
       
       </div>
     </div>
