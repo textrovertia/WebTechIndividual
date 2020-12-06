@@ -58,7 +58,7 @@ class Contact
         
     }
     
-    public function getCustomers(){
+    public function getContact(){
         $query = 'SELECT * FROM '.$this->table;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

@@ -33,7 +33,7 @@
                         Customer
                       </button>
                        <br>
-                       <button href="#exampleModalCenter2" type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+                       <button href="adminlogin.php" type="button" id="mybtn1" class="btn btn-primary" >
                         Employee
                       </button>
                      
@@ -90,7 +90,7 @@
                     </div>
                     <div class="modal-body">
                     
-                      <form id="myform" method="POST">
+                      <form id="myform" action="adminlogin.php" method="POST">
                       <p>Kindly provide your employee login details below</p>
                         <table>
                             <tr>
@@ -108,7 +108,7 @@
                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
-                            <input type="submit" value="Login" name="login" class="btn btn-primary">
+                            <input type="submit" value="Login" href="" name="login" class="btn btn-primary">
                           </div>
                       </form>
                       <p id="result"></p>
@@ -122,87 +122,4 @@
        
     </body>
 </html>
-
-
-<?php
-$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "freezelink";
-
-
-
-    //Create connection
-    $conn = new mysqli($servername, $username, $password,$dbname);
-    
-   
-    //Check connection
-    if ($conn->connect_error){
-        die("Connection failed:".$conn->connect_error);
-    }
-
-    if ($conn->connect_error){
-        die("connection fail: " . $conn->connect_error);
-    }
-
-    //If login is clicked, and password is right
-    if(isset($_POST['login'])){
-    $error="";
-    echo '
-            <script> 
-                 
-            
-              swal({
-                      title: "Wrong password",
-                      text: "You entered the wrong password. You have four more attempts",
-                      icon: "error",
-                    }); 
-           
-            </script>';
-        
-   
-
-        $user=$_POST["email"];
-        $pass = $_POST['password1'];
-        $result = $conn->query("select * from manager where email = '$user'");
-        $row = mysqli_fetch_assoc($result);
-        $hash=$row["account_password"];
-        $auth = password_verify($_POST['password1'], $hash);
-
-       if($result->num_rows > 0)
-       {
-            $_SESSION["id"] = $row['id'];
-            $_SESSION["email"] = $row['email'];
-           if ($auth===TRUE){
-            
-          
-            header('location:admincontact.php');
-           }else{
-               
-            echo '
-            <script> 
-                 
-            
-              swal({
-                      title: "Wrong password",
-                      text: "You entered the wrong password. You have four more attempts",
-                      icon: "error",
-                    }); 
-           
-            </script>';
-           }
-           
-       }
-    
-
-    }else{
-      
-           
-           
-    }
-    
-?>
-
-
-?>
 

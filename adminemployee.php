@@ -1,5 +1,26 @@
 
 <?php
+
+include_once './Backend/config/Database.php';
+include_once './Backend/model/Employee.php';
+
+
+ //Instantiate DB and connect 
+ $database = new Database();
+ $db = $database->connect();
+
+
+ $info = new Employee($db);
+ $result = $info->getEmployee();
+
+ session_start();
+ if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
+
+
+
+
+
+/* 
 $servername = "localhost";
     $username = "root";
     $password = "";
@@ -31,7 +52,7 @@ if ($result2=mysqli_query($con,$sql1))
   // Free result set
   mysqli_free_result($result2);
   }
-
+ */
 
    
   
@@ -81,7 +102,7 @@ if ($result2=mysqli_query($con,$sql1))
         
         <li class="nav-item text-nowrap">
   
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="logout.php">Logout</a>
         </li>
         </ul>
     </nav>
@@ -138,11 +159,7 @@ if ($result2=mysqli_query($con,$sql1))
         </thead>
         <tbody id="contacting">
         <?php
-
-          if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {    
-              
+while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
           ?>		
 
             <tr id="contacting2">
@@ -160,7 +177,7 @@ if ($result2=mysqli_query($con,$sql1))
             </tr>
 	  
         <?php	
-          } }
+          } 
         ?>
 	
          
@@ -267,14 +284,8 @@ if (isset($_POST['submit'])){
   $dept=$_POST['dept'];
   $email=$_POST['email'];
 
-
-  echo $fname;
-  echo $lname;
-  echo $date;
-  echo $dept;
-  echo $email;
         $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
-      if ($conn->query($sql)===true){
+      if ($db->query($sql)===true){
           
           echo '<script>
           swal({
@@ -288,8 +299,8 @@ if (isset($_POST['submit'])){
       }else{
           echo '<script>
           swal({
-              title: "Wrong password",
-              text: "You entered the wrong password. You have four more attempts",
+              title: "Error",
+              text: "You were unable to enter the data into the database",
               icon: "error",
             }); 
      }

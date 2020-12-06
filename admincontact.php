@@ -9,8 +9,12 @@
 
 
     $info = new Contact($db);
-    $result = $info->getCustomers();
+    $result = $info->getContact();
 
+    //If not logged in, redirect to login page
+    session_start();
+    if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
+    
 
     
 
@@ -77,7 +81,7 @@
         
         <li class="nav-item text-nowrap">
   
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="logout.php">Logout</a>
         </li>
         </ul>
     </nav>
@@ -106,7 +110,7 @@
       <hr>
     
     <div class="table-responsive">
-      <table class="able table-striped table-bordered">
+      <table class="table table-striped table-bordered">
   
         <thead>
           <tr>
@@ -115,6 +119,8 @@
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
             <th scope="col">Messages</th>
+            <th scope="col">Action</th>
+   
           </tr>
         </thead>
         <tbody id="contacting">
@@ -129,7 +135,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["last_name"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
                 <td><?php echo $row["messages"]; ?></td>
-      	
+      	        <td> <a href="delete.php?delId=<?php echo $val['id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a></td>
             </tr>
 	  
         <?php	
