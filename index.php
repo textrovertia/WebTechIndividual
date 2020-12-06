@@ -33,9 +33,9 @@
                         Customer
                       </button>
                        <br>
-                       <button href="adminlogin.php" type="button" id="mybtn1" class="btn btn-primary" >
+                       <a href="adminlogin.php" type="button" id="mybtn1" class="btn btn-primary" >
                         Employee
-                      </button>
+                      </a>
                      
 
                     </form>

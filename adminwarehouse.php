@@ -17,6 +17,9 @@ include_once './Backend/model/Employee.php';
  if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
 
 
+
+
+
 /* 
 $servername = "localhost";
     $username = "root";
@@ -61,7 +64,7 @@ if ($result2=mysqli_query($con,$sql1))
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/adminemployee.css" >
+    <link rel="stylesheet" href="css/adminwarehouse.css" >
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,9 +88,6 @@ if ($result2=mysqli_query($con,$sql1))
       }
 
     </style>
-    <script>
-      
-    </script>
 
 </head>
 <body>
@@ -114,7 +114,7 @@ if ($result2=mysqli_query($con,$sql1))
       <div class="list-group list-group-flush">
       
             <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Customer</a>
-            <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
+            <a href="#cars"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
             <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
             <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
             <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a>
@@ -137,7 +137,7 @@ if ($result2=mysqli_query($con,$sql1))
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Number of Employees</h4>
-        <h1 class="card-text"><?php echo $info->countEmployees() ?></h1>
+        <h1 class="card-text"><?php echo $result2; ?></h1>
       
       </div>
     </div>
@@ -160,8 +160,6 @@ if ($result2=mysqli_query($con,$sql1))
         <tbody id="contacting">
         <?php
 while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
-         
-      
           ?>		
 
             <tr id="contacting2">
@@ -172,10 +170,10 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["department"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
                 <td>
-                <a href="edit-users.php?editId=<?php echo $row['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
-                <a href="Backend/config/delete.php?id=<?php echo $row['employee_id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
+                <a href="edit-users.php?editId=<?php echo $val['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
+                <a href="delete.php?delId=<?php echo $val['id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
             </td>
-           
+      	
             </tr>
 	  
         <?php	
@@ -276,6 +274,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 
     <?php
 
+
 if (isset($_POST['submit'])){
 
   
@@ -286,7 +285,7 @@ if (isset($_POST['submit'])){
   $email=$_POST['email'];
 
         $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
-      if ($db->exec($sql)){
+      if ($db->query($sql)===true){
           
           echo '<script>
           swal({

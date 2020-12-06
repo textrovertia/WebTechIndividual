@@ -82,6 +82,8 @@ class Employee
         $stmt->execute();
         return $stmt;
     }
+
+    
     public function validateEmail(){
         $query = 'SELECT COUNT(*) as exist FROM '.$this->table.' where email=:e';
         $stmt = $this->conn->prepare($query);
@@ -89,4 +91,14 @@ class Employee
         $stmt->execute();
         return $stmt;
     }
+
+    public function countEmployees(){
+        $query = "SELECT count(*) FROM".$this->table; 
+        $stmt = $this->conn->prepare($query); 
+        $t=$stmt->execute(); 
+
+        // $number_of_rows = $stmt->fetchColumn(); 
+        return $t;
+    }
+
 }
