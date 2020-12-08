@@ -2,61 +2,24 @@
 <?php
 
 include_once './Backend/config/Database.php';
+include_once './Backend/model/Warehouse.php';
 include_once './Backend/model/Employee.php';
-
 
  //Instantiate DB and connect 
  $database = new Database();
  $db = $database->connect();
 
 
- $info = new Employee($db);
- $result = $info->getEmployee();
+//Create a new instance of the Warehouse Class
+ $info = new Warehouse($db);
+ $result = $info->getWarehouse();
+
+ $employee=new Employee($db);
+
 
  session_start();
+ //If user is not logged in, redirect to the login page
  if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
-
-
-
-
-
-/* 
-$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "freezelink";
-
-
-
-     echo 'SELECT COUNT("employee_id") FROM employee'; 
-
-    //Create connection
-    $conn = new mysqli($servername, $username, $password,$dbname);
-    
-
-    //Check connection
-    if ($conn->connect_error){
-        die("Connection failed:".$conn->connect_error);
-    }
-    $sql1 = "SELECT * FROM employee";
-    $result = $conn->query($sql1);
-
-  
-$sql1="SELECT * FROM employee";
-
-if ($result2=mysqli_query($con,$sql1))
-  {
-  // Return the number of rows in result set
-  $rowcount=mysqli_num_rows($result2);
-  printf("Result set has %d rows.\n",$rowcount);
-  // Free result set
-  mysqli_free_result($result2);
-  }
- */
-
-   
-  
-
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +77,7 @@ if ($result2=mysqli_query($con,$sql1))
       <div class="list-group list-group-flush">
       
             <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Customer</a>
-            <a href="#cars"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
+            <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
             <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
             <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
             <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a>
@@ -129,19 +92,10 @@ if ($result2=mysqli_query($con,$sql1))
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         
     <div id="orders">
-      <h3>Employees</h3>
+      <h3>Warehouses</h3>
       <hr>
 
-      <div class="row">
-  <div class="col-sm-4  mycard">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Number of Employees</h4>
-        <h1 class="card-text"><?php echo $result2; ?></h1>
       
-      </div>
-    </div>
-  </div>
     
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
@@ -149,26 +103,37 @@ if ($result2=mysqli_query($con,$sql1))
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Date Employed</th>
-            <th scope="col">Department</th>
-            <th scope="col">Email</th>
+            <th scope="col">Employee in Charge</th>
+            <th scope="col">Street Name</th>
+            <th scope="col">Street Number</th>
+            <th scope="col">Town</th>
+            <th scope="col">Region</th>
+            <th scope="col">Max. Capacity</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody id="contacting">
         <?php
 while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
+ 
           ?>		
-
+          <?php 
+           $second=$employee->getEmployeeName($row["employee_id"]);
+           while ( $row2 = $second->fetch(PDO::FETCH_ASSOC)){
+              $employeeName= $row2['first_name'] .' '.$row2['last_name'];
+           };
+          
+          ?>
+            
             <tr id="contacting2">
-                <td><?php echo $row["employee_id"];  ?></td>
-                <td><?php echo $row["first_name"]; ?></td>
-                <td><?php echo $row["last_name"]; ?></td>
-                <td><?php echo $row["date_employed"]; ?></td>
-                <td><?php echo $row["department"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
+                <td><?php echo $row["warehouse_id"];  ?></td>
+                <td><?php echo $employeeName; ?></td>
+                <td><?php echo $row["street_name"]; ?></td>
+                <td><?php echo $row["street_number"]; ?></td>
+                <td><?php echo $row["town"]; ?></td>
+                <td><?php echo $row["region"]; ?></td>
+                <td><?php echo $row["capacity"]; ?></td>
+            
                 <td>
                 <a href="edit-users.php?editId=<?php echo $val['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
                 <a href="delete.php?delId=<?php echo $val['id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
@@ -187,10 +152,9 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
     </div>
 
     <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                       Add Employee
-                      </button>
+    Add Employee
+    </button>
 </div>
-
 
 
 
@@ -212,8 +176,10 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                         <p>Please enter the information below</p>
                         
                         <table>
+                       
                             <tr>
-                                <td>First Name:</td>
+                            <span> Details of Employee in Charge:</span>
+                                <td>First name:</td>
                                 <td><input  type="text" required placeholder="Enter first name here" class="form-control" name="fname"></td>
                                
 
@@ -224,17 +190,26 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                                 <td><input  type="text"  required placeholder="Enter last name here"  class="form-control" name="lname"></td>
                                
                             </tr>
+                        </table>
+                        <table>
+                        <p>Warehouse Details </p>
 
                             <tr>
-                                <td>Date Employed:</td>
-                                <td><input  type="date" class="form-control" name="date_e" required> </td>
+                                <td>Street Name:</td>
+                                <td><input  type="text" class="form-control" name="date_e" required> </td>
+                            </tr>
+
+                            
+                            <tr>
+                            <td>Street Number:</td>
+                            <td><input  type="number" required placeholder="Enter email here" class="form-control" name="email"></td>
                             </tr>
 
                             <tr>
-                                <td>Department:</td>
+                                <td>Town:</td>
                                 <td><select class="form-control" id="select" name="dept">
-                            <option>Sales and Marketing</option>
-                            <option>Research and Development</option>
+                            <option>Accra</option>
+                            <option>Cape Coast </option>
                             <option>Human Resource Management</option>
                             <option>Accounting and Finance</option>
                             <option>Purchasing</option>
@@ -274,7 +249,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 
     <?php
 
-
+// Insernt into the table after adding the employee
 if (isset($_POST['submit'])){
 
   
@@ -325,10 +300,7 @@ if (isset($_POST['submit'])){
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
- 
-
-<script src="https://kit.fontawesome.com/95e3cf507f.js"></script>
+    <script src="https://kit.fontawesome.com/95e3cf507f.js"></script>
     
    
 </body>

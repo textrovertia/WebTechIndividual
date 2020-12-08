@@ -12,6 +12,7 @@ if ($conn->connect_error) {
 } 
 
 $id = $_REQUEST["id"];
+$table=$_REQUEST["table"];
 
 echo $id;
 

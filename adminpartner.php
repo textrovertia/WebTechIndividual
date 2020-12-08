@@ -25,46 +25,71 @@ $servername = "localhost";
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-       
     <link rel="stylesheet" href="css/adminpartner.css" >
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        color: #222;
+        display: block;
+      }
+
+      .sidenav a:hover{
+        color:#43907f;;
+      }
+
+      .icon{
+        margin-right:5px;
+      }
+
+    </style>
+    <script>
+      
+    </script>
+
 </head>
 <body>
-    <!--Navbar Top-->
+
+
     <nav class="navbar navbar-dark fixed-top bg-custom flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Freezelink Limited </a>
       
-        <input type="text" id="searchbar" class="form-control form-control-primary" placeholder="Search..." >
-
+        <input type="text" id="searchbar" class="form-control form-control-primary w-100" placeholder="Search..." >
         <span><img src="images/whatwedo.png" alt="User Image" class="userimage"></span>
         <ul class="navbar-nav px-3">
         
         <li class="nav-item text-nowrap">
   
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="logout.php">Logout</a>
         </li>
         </ul>
     </nav>
 
-    <!--Navbar Side-->
-    <div class="wrapper">
+
+     <!-- Sidebar -->
+     <div class="wrapper">
      <div class="bg-light border-right sidenav" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
       
-            <a href="#orders" class="menu-item"><span class="icon" style="margin-right:5px;"><i class="fas fa-user"></i></span>Customer</a>
-            <a href="#cars"><span class="icon" style="margin-right:5px;"><i class="fas fa-warehouse"></i></span>Warehouse</a>
-            <a href="admininventory.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-boxes"></i></span>Inventory</a>
-            <a href="adminemployee.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-user-friends"></i></span>Employees</a>
-            <a href="adminpartner.php"><span class="icon"style="margin-right:5px;"><i class="fas fa-handshake"></i></span>Partners</a>
-            <a href="admincontact.php"><span class="icon" style="margin-right:5px;"><i class="fas fa-address-book"></i></span>Messages </a>
+            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Customer</a>
+            <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
+            <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
+            <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
+            <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a>
+            <a href="admincontact.php"><span class="icon"><i class="fas fa-address-book"></i></span>Messages </a>
       </div>
     </div>
     </div>
+
+
 
     <!--Body-->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">

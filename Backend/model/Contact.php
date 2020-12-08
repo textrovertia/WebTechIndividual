@@ -31,7 +31,7 @@ class Contact
             ';
         $stmt = $this->conn->prepare($query);
 
-        
+        $this->id=htmlspecialchars(strip_tags($this->id));
         $this->first = htmlspecialchars(strip_tags($this->fName));
         $this->last = htmlspecialchars(strip_tags($this->lName));
         $this->email = htmlspecialchars(strip_tags($this->email));
@@ -71,4 +71,6 @@ class Contact
         $stmt->execute();
         return $stmt;
     }
+
+
 }

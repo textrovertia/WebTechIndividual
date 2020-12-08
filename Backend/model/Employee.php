@@ -101,4 +101,14 @@ class Employee
         return $t;
     }
 
+    public function getEmployeeName($id){
+        $query="SELECT first_name, last_name from employee where employee_id= '$id'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':e',$id);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    
+
 }

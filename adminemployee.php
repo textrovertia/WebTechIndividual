@@ -173,7 +173,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["email"]; ?></td>
                 <td>
                 <a href="edit-users.php?editId=<?php echo $row['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
-                <a href="Backend/config/delete.php?id=<?php echo $row['employee_id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
+                <a href="Backend/config/delete.php?id=<?php echo $row['employee_id'];?>?table='employee'" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
             </td>
            
             </tr>

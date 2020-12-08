@@ -1,7 +1,7 @@
 <?php
 include_once 'Employee.php';
 
-class Warehouse extends Employee
+class Warehouse 
 {
     private $conn;
     private $table = 'warehouse';
