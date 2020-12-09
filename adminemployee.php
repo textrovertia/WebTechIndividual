@@ -132,16 +132,19 @@ if ($result2=mysqli_query($con,$sql1))
       <h3>Employees</h3>
       <hr>
 
-      <div class="row">
+<?php ?>
+  <div class="row">
   <div class="col-sm-4  mycard">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Number of Employees</h4>
-        <h1 class="card-text"><?php echo $info->countEmployees() ?></h1>
+        <h1 class="card-text"><?php echo $info->countEmployees();  ?></h1>
       
       </div>
     </div>
   </div>
+
+   
     
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
@@ -159,6 +162,7 @@ if ($result2=mysqli_query($con,$sql1))
         </thead>
         <tbody id="contacting">
         <?php
+        
 while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
          
       
@@ -171,14 +175,20 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["date_employed"]; ?></td>
                 <td><?php echo $row["department"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
+           
                 <td>
-                <a href="edit-users.php?editId=<?php echo $row['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
-                <a href="Backend/config/delete.php?id=<?php echo $row['employee_id'];?>?table='employee'" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
+                <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2">
+                <i class="fa fa-fw fa-edit"></i>
+                      </a>
+          
+                <a href="Backend/config/delete.php?table=employee&id=<?php echo $row['employee_id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a> | 
             </td>
            
             </tr>
+            
 	  
         <?php	
+      
           } 
         ?>
 	
@@ -188,7 +198,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
       </table>
     </div>
 
-    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
                        Add Employee
                       </button>
 </div>
@@ -197,7 +207,8 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 
 
 
-<!--Form for inputting data -->
+
+<!--Form for adding new employee -->
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -210,8 +221,81 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                     </div>
                     <div class="modal-body">
                     
-                      <form id="partnerform" method="POST" enctype="multipart/form-data" >
+                      <form id="partnerform" method="POST" action="Backend/config/add.php?table=employee" enctype="multipart/form-data" >
                         <p>Please enter the information below</p>
+                        
+                        <table>
+                            <tr>
+                                <td>First Name:</td>
+                                <td><input  type="text" required placeholder="Enter first name here" class="form-control" name="fname"></td>
+                               
+
+                            </tr>
+                            <br>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td><input  type="text"  required placeholder="Enter last name here"  class="form-control" name="lname"></td>
+                               
+                            </tr>
+
+                            <tr>
+                                <td>Date Employed:</td>
+                                <td><input  type="date" class="form-control" name="date_e" required> </td>
+                            </tr>
+
+                            <tr>
+                                <td>Department:</td>
+                                <td><select class="form-control" id="select" name="dept">
+                            <option>Sales and Marketing</option>
+                            <option>Research and Development</option>
+                            <option>Human Resource Management</option>
+                            <option>Accounting and Finance</option>
+                            <option>Purchasing</option>
+                           
+                            </select></td>
+                               
+                            </tr>
+
+                            <tr>
+
+
+                            <td>Email:</td>
+                            <td><input  type="text" required placeholder="Enter email here" class="form-control" name="email"></td>
+                               
+
+
+                            </tr>
+
+                        </table>
+                        <div class="modal-footer">
+                        <button href="Backend/config/update.php?table=employee&id=<?php echo $row['employee_id'];?>" class="text-primary"></button> 
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <input type="submit" value="Update" name="submit" class="btn btn-primary">
+                          </div>
+                      </form>
+                      <p id="result"></p>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+    </div>
+
+
+    <!-- Form for updating employee information -->
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Edit Partner Information</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                      <form id="partnerform" method="POST" action="Backend/config/add.php?table=employee" enctype="multipart/form-data" >
+                        <p>Please edit the information below</p>
                         
                         <table>
                             <tr>
@@ -270,55 +354,13 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
     </div>
 </div>
 
+</div>
 
 
-    </main>
-
-    <?php
-
-if (isset($_POST['submit'])){
-
-  
-  $fname = $_POST['fname'];
-  $lname=$_POST['lname'];
-  $date=$_POST['date_e'];
-  $dept=$_POST['dept'];
-  $email=$_POST['email'];
-
-        $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
-      if ($db->exec($sql)){
-          
-          echo '<script>
-          swal({
-              title: "Success!",
-              text: "You successfully added an employee to the database",
-              icon: "success",
-            }); 
-          
-          </script>';
-          
-      }else{
-          echo '<script>
-          swal({
-              title: "Error",
-              text: "You were unable to enter the data into the database",
-              icon: "error",
-            }); 
-     }
-          
-          </script>';
-          
-      };
-
-}
+<
 
 
-
-
-
-?>
- 
- 
+    </main> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <script scr="js/jquery-3.5.1.js"></script>
     <script src="js/admincontactus.js"></script>

@@ -102,11 +102,27 @@ class Employee
     }
 
     public function getEmployeeName($id){
-        $query="SELECT first_name, last_name from employee where employee_id= '$id'";
+        $query="SELECT first_name, last_name, email from employee where employee_id= '$id'";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':e',$id);
         $stmt->execute();
         return $stmt;
+    }
+
+    public function getEmployeeid($firstname, $lastname, $email){
+        $query="SELECT employee_id from employee where first_name= '$firstname' AND last_name='$lastname' AND email='$email'";
+        $stmt = $this->conn->prepare($query);
+   
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function deleteEmployee(){
+        $sql = "DELETE FROM employee WHERE employee_id='$id'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+
     }
 
     

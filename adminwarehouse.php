@@ -136,7 +136,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
             
                 <td>
                 <a href="edit-users.php?editId=<?php echo $val['id'];?>" class="text-primary"><i class="fa fa-fw fa-edit"></i> </a> | 
-                <a href="delete.php?delId=<?php echo $val['id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
+                <a href="Backend/config/delete.php?table=warehouse&id=<?php echo $row['warehouse_id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a>
             </td>
       	
             </tr>
@@ -172,17 +172,14 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                     </div>
                     <div class="modal-body">
                     
-                      <form id="partnerform" method="POST" enctype="multipart/form-data" >
+                      <form id="partnerform" method="POST"  action="Backend/config/add.php?table=warehouse" enctype="multipart/form-data" >
                         <p>Please enter the information below</p>
                         
                         <table>
-                       
+                        <h5> Details of Employee in Charge:</h5>
                             <tr>
-                            <span> Details of Employee in Charge:</span>
                                 <td>First name:</td>
                                 <td><input  type="text" required placeholder="Enter first name here" class="form-control" name="fname"></td>
-                               
-
                             </tr>
                             <br>
                             <tr>
@@ -190,44 +187,57 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                                 <td><input  type="text"  required placeholder="Enter last name here"  class="form-control" name="lname"></td>
                                
                             </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><input  type="text"  required placeholder="Enter last name here"  class="form-control" name="email"></td>
+                               
+                            </tr>
                         </table>
                         <table>
-                        <p>Warehouse Details </p>
+                        <h5>Warehouse Details </h5>
 
                             <tr>
                                 <td>Street Name:</td>
-                                <td><input  type="text" class="form-control" name="date_e" required> </td>
+                                <td><input  type="text" class="form-control" name="street_name" required placeholder='Enter street number here'> </td>
                             </tr>
 
                             
                             <tr>
                             <td>Street Number:</td>
-                            <td><input  type="number" required placeholder="Enter email here" class="form-control" name="email"></td>
+                            <td><input  type="number" required placeholder="Enter street number here" class="form-control" name="street_number"></td>
                             </tr>
 
                             <tr>
                                 <td>Town:</td>
-                                <td><select class="form-control" id="select" name="dept">
+                                <td><select class="form-control" id="select" name="town">
                             <option>Accra</option>
                             <option>Cape Coast </option>
-                            <option>Human Resource Management</option>
-                            <option>Accounting and Finance</option>
-                            <option>Purchasing</option>
+                            <option>Kumasi</option>
+                            <option>Ho</option>
+                            <option>Sunyani</option>
+                            <option>Wa</option>
+                           
+                            </select></td>
+                               
+                            </tr>
+                            <tr>
+                                <td>Region:</td>
+                                <td><select class="form-control" id="select" name="region">
+                            <option>Central</option>
+                            <option>Ashanti</option>
+                            <option>Greater Accra</option>
+                            <option>Upper West</option>
+                            <option>Bono</option>
+                            <option>Volta</option>
                            
                             </select></td>
                                
                             </tr>
 
                             <tr>
-
-
-                            <td>Email:</td>
-                            <td><input  type="text" required placeholder="Enter email here" class="form-control" name="email"></td>
-                               
-
-
+                            <td>Max Capacity:</td>
+                            <td><input  type="number" required placeholder="Enter maximum capacity here" class="form-control" name="max_cap"></td>
                             </tr>
-
                         </table>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -249,40 +259,60 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 
     <?php
 
-// Insernt into the table after adding the employee
+// Insert into the table after adding the employee
 if (isset($_POST['submit'])){
 
   
   $fname = $_POST['fname'];
   $lname=$_POST['lname'];
-  $date=$_POST['date_e'];
-  $dept=$_POST['dept'];
   $email=$_POST['email'];
+  $streetname=$_POST['street_name'];
+  $streetnumber=$_POST['street_number'];
+  $town=$_POST['town'];
+  $region=$_POST['region'];
+  $maxcapacity=$_POST['max_cap'];
 
-        $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
-      if ($db->query($sql)===true){
-          
-          echo '<script>
-          swal({
-              title: "Success!",
-              text: "You successfully added an employee to the database",
-              icon: "success",
-            }); 
-          
-          </script>';
-          
-      }else{
-          echo '<script>
-          swal({
-              title: "Error",
-              text: "You were unable to enter the data into the database",
-              icon: "error",
-            }); 
-     }
-          
-          </script>';
-          
-      };
+  $employeeid=null;
+  $third=$employee->getEmployeeid($fname, $lname, $email);
+  while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
+    $employeeid= $row3['employee_id'] ;
+
+  
+  }
+  if($employeeid===null){
+    echo '<script>
+    alert("The employee entered does not exist");
+    </script>';
+  }else{
+    
+    $sql="INSERT INTO warehouse(employee_id, street_name , street_number, town, region, capacity) VALUES('$employeeid', '$streetname','$streetnumber', '$town', '$region', '$maxcapacity')";
+    if ($db->query($sql)===true){
+        
+        echo '<script>
+        swal({
+            title: "Success!",
+            text: "You successfully added an employee to the database",
+            icon: "success",
+          }); 
+        
+        </script>';
+        
+    }else{
+        echo '<script>
+        swal({
+            title: "Error",
+            text: "You were unable to enter the data into the database",
+            icon: "error",
+          }); 
+   }
+        
+        </script>';
+        
+    };
+
+
+  }
+  
 
 }
 

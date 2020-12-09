@@ -135,7 +135,8 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["last_name"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
                 <td><?php echo $row["messages"]; ?></td>
-      	        <td> <a href="delete.php?delId=<?php echo $val['id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a></td>
+                <td>  <a href="Backend/config/delete.php?table=contactus&id=<?php echo $row['messageid'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a></td>
+      	      
             </tr>
 	  
         <?php	
