@@ -80,9 +80,9 @@ h2{
     margin-bottom: 45px;
 }
 
-.container{
+/* .container{
     text-align: center;
-}
+} */
 
 .homeimage{
     max-width: 40%;
@@ -127,25 +127,25 @@ button{
     color:white;
 }
 
-.middle{
+/* .middle{
     text-align: center;
     margin-bottom:10px;
 }
-
+ */
 
 
 .middle:hover{
     color: #31a8bd;
 }
 
+.mycard{
+    color:black;
+}
 
 
-
-
-
-
-
-
+.space{
+    height: 120px;
+}
 
 
 

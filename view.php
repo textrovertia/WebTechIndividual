@@ -1,3 +1,39 @@
+<?php
+class View{
+  public $src;
+  public $cardtitle; 
+  
+  public function __construct__(){
+    $this->src=$src;
+    $this->cardtitle=$cardtitle;
+
+  }
+
+  public function createNew($src, $cardtitle, $cardmessage){
+
+
+    return  <<<__DISPLAY
+      <div class="col-sm-4">
+                  <div class="card mycard bg-dark" style="width: 18em; border-radius:15px;">
+                    <img class="card-img-top" src='$src' alt="Card image cap" style="border-radius:15px 15px 0px 0px;">
+                        <div class="card-body">
+                        
+                         $cardmessage
+                          <a href="customerlogin.php"><i class="fas fa-shopping-cart"></i></a>
+                          
+                      </div>
+                      </div>
+                </div>
+    __DISPLAY;
+  }
+}
+
+$info=new View;
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,9 +48,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="js/view.js"></script>
+        <script src="https://kit.fontawesome.com/95e3cf507f.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -70,19 +106,34 @@
     
         <h1>We have a wide range of products available to you </h1>
     </div>
-    <!--Meat-->
+    <!--Medicine-->
     <div class="container" id="medicine">
     <h2>Medicine</h2>
+  
+    <?php 
+   echo $info->createNew("images/medicine.jpg", "Hello! I am working", "This is about medicine"); 
+   echo $info->createNew("images/medicine.jpg", "Hello! I am working", "This is it "); 
+   echo $info->createNew("images/medicine.jpg", "Hello! I am working", "Done!"); 
     
-    
+    ?>
+
     </div>
-    
+
+    <div class="space" style="height:200px;">
+  
     </div>
 
     <!--Fruit-->
     <div class="container" id="fruits">
       <h2>Fruit</h2>
+      <?php 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
+        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
+          
+    ?> 
     
+           
     
     </div>
 
@@ -110,6 +161,7 @@
 
    <div class="container" id="fish">
      <h2>Fish</h2>
+     <?php $info ?>
    </div>
 
 

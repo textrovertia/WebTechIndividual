@@ -65,7 +65,7 @@ include_once './Backend/model/Employee.php';
         
         <li class="nav-item text-nowrap">
   
-            <a class="nav-link" href="logout.php">Logout</a>
+            <a class="nav-link" href="adminlogout.php">Logout</a>
         </li>
         </ul>
     </nav>

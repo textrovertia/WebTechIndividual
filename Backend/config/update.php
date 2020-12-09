@@ -38,8 +38,10 @@ if (isset($_POST['submit'])){
     $date=$_POST['date_e'];
     $dept=$_POST['dept'];
     $email=$_POST['email'];
+   
+
   
-          $sql="UPDATE employee SET first_name='$fname' last_name='$lname', department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
+          $sql="UPDATE employee SET first_name='$fname' last_name='$lname', department='$date' , email='$email', date_employed='$date' WHERE id=4";
         if ($db->exec($sql)){
   
           echo "Yayyyyy";
