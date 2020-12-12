@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-</html>
-
+<body>
 <?php 
 include_once 'Database.php';
 include_once '../model/Employee.php';
@@ -26,8 +25,7 @@ include_once '../model/Employee.php';
 
  $id = $_REQUEST["id"];
 $table=$_REQUEST['table'];
-echo $table;
-echo $id; 
+ echo $id;
 
 if($table==="employee"){
     
@@ -44,22 +42,14 @@ if (isset($_POST['submit'])){
   
     $sql ="UPDATE employee
     SET first_name = '$fname', last_name = '$lname', date_employed='$date', department='$dept', email='$email'
-    WHERE employee_id=1";
+    WHERE employee_id='$id'";
         if ($db->exec($sql)){
   
-          echo "Yayyyyy";
-          // header('location:../../adminemployee.php');
+        
+           header('location:../../adminemployee.php');
             
         }else{
-            echo '<script>
-            swal({
-                title: "Error",
-                text: "You were unable to enter the data into the database",
-                icon: "error",
-              }); 
-       }
-            
-            </script>';
+            echo 'You were unable to edit the information given. It is likely that the id you entered was wrong';
             
         };
   
@@ -67,11 +57,8 @@ if (isset($_POST['submit'])){
 
 
 }elseif($table==="warehouse"){
-    
 // Insert into the table after adding the employee
 if (isset($_POST['submit'])){
-
-  
     $fname = $_POST['fname'];
     $lname=$_POST['lname'];
     $email=$_POST['email'];
@@ -98,15 +85,6 @@ if (isset($_POST['submit'])){
       if ($db->query($sql)===true){
           echo "Hi";
           
-          echo '<script>
-          swal({
-              title: "Success!",
-              text: "You successfully added an employee to the database",
-              icon: "success",
-            }); 
-          
-          </script>';
-          
       }else{
           echo '<script>
           swal({
@@ -126,3 +104,6 @@ if (isset($_POST['submit'])){
 };
 }
 
+?>
+</body>
+</html>

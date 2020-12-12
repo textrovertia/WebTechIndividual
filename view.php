@@ -1,5 +1,8 @@
 <?php
+ session_start();
+include_once './Backend/config/Database.php';
 require_once './Backend/model/Inventory.php';
+
 //Create a new class called View to contain the HTML card code
 class View{
   public $src;
@@ -11,11 +14,17 @@ class View{
 
   }
 
-  public function createNew($src, $cardtitle, $cardmessage){
 
+  public function createNew($src, $cardtitle, $cardmessage, $price, $qty){
+    if(isset($_SESSION['customerId'])){ 
+      $location="orders.php" ;
+    }else{
+      $location="customerlogin.php";
+    }
 
+   
     $card= <<<__DISPLAY
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="margin-bottom:20px;">
     <div class="card mycard" style="width: 18em; border-radius:15px;">
       <img class="card-img-top" src='$src' alt="Card image cap" style="border-radius:15px 15px 0px 0px;">
  
@@ -24,7 +33,10 @@ class View{
                     
                      $cardmessage
                      <br>
-                    <span>Click here to make a purchase:</span>  <a href="customerlogin.php"> <i class="fas fa-shopping-cart"></i></a>
+                     <p>Price: $price</p>
+                     <p>Qty in Stock: $qty </p>
+                     
+                    <span>Click here to make a purchase:</span>  <a href=$location?order=$cardtitle> <i class="fas fa-shopping-cart"></i></a>
                       
                   </div>
                   </div>
@@ -55,9 +67,15 @@ class View{
 $info=new View;
 
 //create a new instance of the Inventory class
+//Instantiate DB and connect 
+$database = new Database();
+$db = $database->connect();
 
-$inventory=new Inventory;
-$result = $inventory->getInventory();
+$inventory=new Inventory($db);
+$medicine = $inventory->getItem('medicine');
+
+  
+    
 ?>
 
 <!DOCTYPE html>
@@ -124,6 +142,16 @@ $result = $inventory->getInventory();
     
 
     <main>
+    <?php
+   
+     if(isset($_SESSION['customerId'])){ 
+       $t=$_SESSION['firstname'] ;
+       echo " <h2>Welcome to the Freezelink site, $t ! You have currently ordered</h2>";
+     }
+
+
+
+    ?>
 
 
     <div class="container">
@@ -133,12 +161,12 @@ $result = $inventory->getInventory();
     <!--Medicine-->
     <div class="container" id="medicine">
         <h2>Medicine</h2>
-        <?php 
-          echo $info->createNew("images/medicine.jpg", "Paracetamol ", "We sell paracetamol in bulk and transport it to the various locations around Ghana."); 
-          echo $info->createNew("images/medicine.jpg", "Hello! ", "This is it "); 
-          echo $info->createNew("images/medicine.jpg", "Hello!", "Done!"); 
         
-        ?>
+        <?php 
+        while ( $row = $medicine->fetch(PDO::FETCH_ASSOC)){
+          echo $info->createNew("images/medicine.jpg", $row['inventory_name'], "We sell paracetamol in bulk and transport it to the various locations around Ghana.", $row["price"], $row["qty_in_stock"]); }
+      
+       ?>
 
         </div>
 
@@ -149,12 +177,15 @@ $result = $inventory->getInventory();
     <!--Fruit-->
     <div class="container" id="fruits">
       <h2>Fruit</h2>
-      <?php 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
-        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
-          
-    ?> 
+      <?php
+        $fruit = $inventory->getItem('fruit');
+        while ( $row = $fruit->fetch(PDO::FETCH_ASSOC)){
+          echo $info->createNew("images/apples.jpg", $row['inventory_name'], "We sell paracetamol in bulk and transport it to the various locations around Ghana.", $row["price"], $row["qty_in_stock"]); 
+        
+        }
+
+      ?>
+    
     
            
     
@@ -163,13 +194,13 @@ $result = $inventory->getInventory();
     <!--Vegetables-->
     <div class="container" id="vegetables">
       <h2>Vegetables</h2>
-      <?php 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
-        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
-          
-    ?> 
-    
+      <?php
+        $vegetables = $inventory->getItem('vegetables');
+        while ( $row = $vegetables->fetch(PDO::FETCH_ASSOC)){
+          echo $info->createNew("images/vegetables.jpg", $row['inventory_name'], "We sell paracetamol in bulk and transport it to the various locations around Ghana.", $row["price"], $row["qty_in_stock"]); 
+        }
+
+      ?>
     
     
     </div>
@@ -177,13 +208,13 @@ $result = $inventory->getInventory();
     <!--Dairy-->
     <div class="container" id="dairy">
       <h2>Dairy</h2>
-      <?php 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
-        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
-          
-    ?> 
-    
+      <?php
+        $dairy = $inventory->getItem('dairy');
+        while ( $row = $dairy->fetch(PDO::FETCH_ASSOC)){
+          echo $info->createNew("images/dairy1.jpg", $row['inventory_name'], "We sell paracetamol in bulk and transport it to the various locations around Ghana.", $row["price"], $row["qty_in_stock"]); 
+        }
+
+      ?>
     
     
     
@@ -192,24 +223,27 @@ $result = $inventory->getInventory();
     <!--Meat-->
     <div class="container" id="meat">
       <h2>Meat</h2>
-      <?php 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
-        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
-          
-    ?> 
+      <?php
+        $meat = $inventory->getItem('meat');
+        while ( $row = $meat->fetch(PDO::FETCH_ASSOC)){
+          echo $info->createNew("images/meat.jpg", $row['inventory_name'], "We sell paracetamol in bulk and transport it to the various locations around Ghana.", $row["price"], $row["qty_in_stock"]); 
+        }
+
+      ?>
     
     
     </div>
 
    <div class="container" id="fish">
      <h2>Fish</h2>
-     <?php 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
-        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
-        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
-          
-    ?> 
+     <?php
+        $fish = $inventory->getItem('fish');
+        while ( $row = $fish->fetch(PDO::FETCH_ASSOC)){
+          echo $info->createNew("images/fish.jpg", $row['inventory_name'], "We sell paracetamol in bulk and transport it to the various locations around Ghana.", $row["price"], $row["qty_in_stock"]); 
+        }
+
+      ?>
+     
     
    </div>
 
@@ -268,7 +302,6 @@ $result = $inventory->getInventory();
               </div>
           </div>
       </div>
-
 
 
 </main>

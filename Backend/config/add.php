@@ -30,10 +30,80 @@ include_once '../model/Warehouse.php';
 $table=$_REQUEST['table'];
 echo $table;
 
+switch ($table){
+  case "employee":
+    if (isset($_POST['submit'])){
 
-if($table==="inventory"){
-  echo "Ho";
- 
+  
+      $fname = $_POST['fname'];
+      $lname=$_POST['lname'];
+      $date=$_POST['date_e'];
+      $dept=$_POST['dept'];
+      $email=$_POST['email'];
+    
+            $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
+          if ($db->exec($sql)){
+    
+            echo "Yayyyyy";
+            header('location:../../adminemployee.php');
+              
+          }else{
+              echo '<script>
+              swal({
+                  title: "Error",
+                  text: "You were unable to enter the data into the database",
+                  icon: "error",
+                }); 
+         }
+              
+              </script>';
+              
+          };
+    
+    }
+  break;
+  
+  case "warehouse":
+    if (isset($_POST['submit'])){
+
+
+  
+      $fname = $_POST['fname'];
+      $lname=$_POST['lname'];
+      $email=$_POST['email'];
+      $streetname=$_POST['street_name'];
+      $streetnumber=$_POST['street_number'];
+      $town=$_POST['town'];
+      $region=$_POST['region'];
+      $maxcapacity=$_POST['max_cap'];
+    
+      $employeeid=null;
+      $third=$employee->getEmployeeid($fname, $lname, $email);
+      while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
+        $employeeid= $row3['employee_id'] ;
+    
+      
+      }
+      if($employeeid===null){
+        echo '<script>
+        alert("The employee entered does not exist");
+        </script>';
+        echo "Hi";
+      }else{
+        
+        $sql="INSERT INTO warehouse(employee_id, street_name , street_number, town, region, capacity) VALUES('$employeeid', '$streetname','$streetnumber', '$town', '$region', '$maxcapacity')";
+        if ($db->exec($sql)){
+          header('location:../../adminwarehouse.php');
+        }else{
+            echo 'We could not enter your data into the database. We apologise.';
+            
+        }
+      }
+    }
+    break;
+
+    case "inventory":
+       
   if (isset($_POST['submit'])){
 
   
@@ -58,131 +128,20 @@ if($table==="inventory"){
     }else{
       
       $sql="INSERT INTO inventory(inventory_name, inventory_category, warehouse_id, qty_in_stock, price) VALUES('$product', '$producttype','$warehouseid', '$qtyinstock', '$priceperpiece')";
-      echo 'Done';
-      if ($db->query($sql)===true){
-          
-          echo '<script>
-          swal({
-              title: "Success!",
-              text: "You successfully added an employee to the database",
-              icon: "success",
-            }); 
-          
-          </script>';
-          
-      }else{
-          echo '<script>
-          swal({
-              title: "Error",
-              text: "You were unable to enter the data into the database",
-              icon: "error",
-            }); 
-     }
-          
-          </script>';
-          
-      };
-  
-  
-    }
-    
-  
-}
-};
-
-if($table==="employee"){
-    
-if (isset($_POST['submit'])){
-
-  
-    $fname = $_POST['fname'];
-    $lname=$_POST['lname'];
-    $date=$_POST['date_e'];
-    $dept=$_POST['dept'];
-    $email=$_POST['email'];
-  
-          $sql="INSERT INTO employee(first_name, last_name, department , email, date_employed) VALUES('$fname', '$lname','$dept', '$email', '$date')";
-        if ($db->exec($sql)){
-  
-          echo "Yayyyyy";
-          header('location:../../adminemployee.php');
-            
-        }else{
-            echo '<script>
-            swal({
-                title: "Error",
-                text: "You were unable to enter the data into the database",
-                icon: "error",
-              }); 
-       }
-            
-            </script>';
-            
-        };
-  
-  }
-
-
-}elseif($table==="warehouse"){
-    
-// Insert into the table after adding the employee
-if (isset($_POST['submit'])){
-
-  
-    $fname = $_POST['fname'];
-    $lname=$_POST['lname'];
-    $email=$_POST['email'];
-    $streetname=$_POST['street_name'];
-    $streetnumber=$_POST['street_number'];
-    $town=$_POST['town'];
-    $region=$_POST['region'];
-    $maxcapacity=$_POST['max_cap'];
-  
-    $employeeid=null;
-    $third=$employee->getEmployeeid($fname, $lname, $email);
-    while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
-      $employeeid= $row3['employee_id'] ;
-  
-    
-    }
-    if($employeeid===null){
-      echo '<script>
-      alert("The employee entered does not exist");
-      </script>';
-    }else{
       
-      $sql="INSERT INTO warehouse(employee_id, street_name , street_number, town, region, capacity) VALUES('$employeeid', '$streetname','$streetnumber', '$town', '$region', '$maxcapacity')";
-      if ($db->query($sql)===true){
-        header('location:../../adminwarehouse.php');
+      if ($db->exec($sql)){
+        echo 'Done';
+        header('location:../../admininventory.php');
           
       }else{
-          echo '<script>
-          swal({
-              title: "Error",
-              text: "You were unable to enter the data into the database",
-              icon: "error",
-            }); 
-     }
-          
-          </script>';
-          
+          echo 'The data could not be entered into the database. Sorry.';
       }
-  
-  
-    }
-
+    }  
+      };
+    break;
+    default:
+    echo "Unable to input "; 
 }
-
-
-
-
-}
-
-
-
-
-
-
 ?>
  
  </body>

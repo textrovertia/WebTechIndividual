@@ -46,6 +46,11 @@ include_once './Backend/model/Warehouse.php';
         margin-right:5px;
       }
 
+      #mybtn1{
+    float:right;
+      }
+}
+
     </style>
     <script>
       
@@ -75,11 +80,11 @@ include_once './Backend/model/Warehouse.php';
      <div class="bg-light border-right sidenav" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
       
-            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Customer</a>
+            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Orders</a>
             <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
             <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
             <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
-            <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a>
+            <!-- <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a> -->
             <a href="admincontact.php"><span class="icon"><i class="fas fa-address-book"></i></span>Messages </a>
       </div>
     </div>
@@ -143,11 +148,11 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["price"]; ?></td>
            
                 <td>
-                <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2">
+                <a data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2">
                 <i class="fa fa-fw fa-edit"></i>
-                      </a>
+                      </a> |
           
-                <a href="Backend/config/delete.php?table=employee&id=<?php echo $row['employee_id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a> | 
+                <a href="Backend/config/delete.php?table=inventory&id=<?php echo $row['inventory_id'];?>" class="text-danger" onClick="return confirm('Are you sure you want to delete this user?');"><i class="fa fa-fw fa-trash"></i></a> 
             </td>
            
             </tr>
@@ -164,7 +169,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
       </table>
     </div>
 
-    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="button" style="float:" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                        Add more inventory
                       </button>
 </div>
@@ -195,10 +200,20 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 
                             </tr>
                             <br>
+                   
+
                             <tr>
                                 <td>Product Type:</td>
-                                <td><input  type="text"  required placeholder="Enter product type here"  class="form-control" name="producttype"></td>
-                               
+                                <td><select class="form-control" id="select" name="producttype">
+                                  <option>Fish</option>
+                                  <option>Meat </option>
+                                  <option>Medicine</option>
+                                  <option>Fruit</option>
+                                  <option>Vegetables</option>
+                                  <option>Dairy</option>
+                                
+                                  </select></td>
+                                    
                             </tr>
                             <br>
                             <tr>

@@ -58,3 +58,8 @@ body {
 .mycard{
   display: inline-flex;
 }
+
+
+#mybtn1{
+  float:right;
+}

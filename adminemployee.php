@@ -1,17 +1,21 @@
 
 <?php
 
+
 include_once './Backend/config/Database.php';
 include_once './Backend/model/Employee.php';
-
 
  //Instantiate DB and connect 
  $database = new Database();
  $db = $database->connect();
 
 
- $info = new Employee($db);
+//Create a new instance of the Warehouse Class
+
+ $info=new Employee($db);
  $result = $info->getEmployee();
+
+
 
  session_start();
  if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
@@ -113,7 +117,7 @@ if ($result2=mysqli_query($con,$sql1))
      <div class="bg-light border-right sidenav" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
       
-            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Customer</a>
+            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Orders</a>
             <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
             <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
             <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
@@ -169,15 +173,16 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
           ?>		
 
             <tr id="contacting2">
-                <td><?php echo $row["employee_id"];  ?></td>
-                <td><?php echo $row["first_name"]; ?></td>
+            <form method="POST">
+                <td name="id"><?php echo $row["employee_id"];  ?></td>
+                <td value=><?php echo $row["first_name"]; ?></td>
                 <td><?php echo $row["last_name"]; ?></td>
                 <td><?php echo $row["date_employed"]; ?></td>
                 <td><?php echo $row["department"]; ?></td>
                 <td><?php echo $row["email"]; ?></td>
            
                 <td>
-                <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2" name=<?php echo $row['employee_id'];?>>
+            <a id="mybtn1" type="submit" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2" name=<?php echo $row['employee_id'];?>>  </form> 
                 <i class="fa fa-fw fa-edit"></i>
                       </a>
           
@@ -198,7 +203,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
       </table>
     </div>
 
-    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                        Add Employee
                       </button>
 </div>
@@ -218,6 +223,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
+       
                     </div>
                     <div class="modal-body">
                       
@@ -225,6 +231,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                         <p>Please enter the information below</p>
                         
                         <table>
+                           
                             <tr>
                                 <td>First Name:</td>
                                 <td><input  type="text" required placeholder="Enter first name here" class="form-control" name="fname"></td>
@@ -295,12 +302,18 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                         <p>Please edit the information below</p>
                         
                         <table>
+
+                            <tr>
+                              <td>Employee ID</td>
+                              <td><input type="number" required placeholder="Enter ID here" name="id"  class="form-control"></td>
+                            </tr>
                             <tr>
                                 <td>First Name:</td>
                                 <td><input  type="text" required placeholder="Enter first name here" class="form-control" name="fname"></td>
                                
 
                             </tr>
+                  
                             <br>
                             <tr>
                                 <td>Last Name:</td>

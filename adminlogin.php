@@ -46,6 +46,7 @@
 </html>
 
 
+
 <?php
 
 // include_once './Backend/config/Database.php';
@@ -64,10 +65,6 @@ $conn = new mysqli($servername, $username , $password,$dbname);
 if ($conn->connect_error){
 	die("connection fail: " . $conn->connect_error);
 }
-$user = 'admin';
-	$pass = "password";
-   
-$sql= "SELECT email, account_password, id FROM manager WHERE email='$user'";
 
 
 if(isset($_POST['userLogin']))
@@ -81,7 +78,11 @@ if(isset($_POST['userLogin']))
 
 
 	$result = mysqli_query($conn, $sql);
-	$row = mysqli_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($result);
+    if($row===null){
+        echo "<script>alert('Wrong password or email')</script>";
+    }
+    else{
 	$hash=$row["account_password"];
 	$auth = password_verify($_POST['password1'], $hash);
 	if ($auth==TRUE){
@@ -99,6 +100,7 @@ if(isset($_POST['userLogin']))
         alert("You entered the wrong password. Please try again")
         
         </script>';
+    };
 	};
   /*  $result = $conn->query("select * from manager where email = '$user' AND account_password = '$pass'");
    if($result->num_rows > 0)

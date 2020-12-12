@@ -89,5 +89,11 @@ class Warehouse
         return $stmt;
     }
 
-
+  /*   public function getWarehousebyId($id){
+        $query="SELECT  from warehouse where warehouse_id= '$id'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+ */
 }

@@ -1,5 +1,5 @@
 <?php
-class Employee
+class Orders
 {
     private $conn;
     private $table = 'employee';

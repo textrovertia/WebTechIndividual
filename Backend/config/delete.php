@@ -28,61 +28,82 @@ if ($conn->connect_error) {
 
 $id = $_REQUEST["id"];
 $table=$_REQUEST["table"];
+echo $table;
 
 //If the table is employee
 
-if ($table==="employee"){
-  echo "hi";
-  $sql = "DELETE FROM employee WHERE employee_id='$id'";
+switch ($table){
+  case "employee":
+    $sql = "DELETE FROM employee WHERE employee_id='$id'";
   
     if (mysqli_query($conn, $sql)) {
       header('location:../../adminemployee.php');
     } else {
       echo " This employee is in charge of a warehouse. Thus, you cannot remove them from your database";
       // echo "Error deleting record: " . mysqli_error($conn);
+      
+      echo "<button>
+        <a href='../../adminemployee.php'>Back to Table</a>
+      </button>";
       }
 
 
-?>
-<button>
-  <a href="../../adminemployee.php">Back to Table</a>
-</button>
+    break; 
 
-<?php
-};
+    case "warehouse":
+      $sql="DELETE FROM warehouse WHERE warehouse_id='$id'";
+      if (mysqli_query($conn, $sql)) {
+        header('location:../../adminwarehouse.php');
+      } else {
+        echo " This warehouse still has inventory in it. Thus, you cannot remove them from your database";
+      //  echo "Error deleting record: " . mysqli_error($conn);
+      echo "<button>
+        <a href='../../adminwarehouse.php'>Back to Table</a>
+      </button>";
+        }
 
-//If the table is a warehouse 
-if($table==="warehouse"){
-  $sql="DELETE FROM warehouse WHERE warehouse_id='$id'";
-  if (mysqli_query($conn, $sql)) {
-    header('location:../../adminwarehouse.php');
-  } else {
-    echo " This warehouse still has inventory in it. Thus, you cannot remove them from your database";
-    echo "Error deleting record: " . mysqli_error($conn);
-    }
-?>
-<button>
-  <a href="../../adminwarehouse.php">Back to Table</a>
-</button>
+        
+    break; 
 
-<?php
-};
-// sql to delete a record from the contactus
-if($table==="contactus"){
-  $sql="DELETE FROM contactus where messageid='$id'";
-  if (mysqli_query($conn, $sql)) {
-    header('location:../../admincontact.php');
-  } else {
-    echo " There was an error in deleting is record from your database. Please try again";
-    echo "Error deleting record: " . mysqli_error($conn);
-    }
+    case "contactus":
+      $sql="DELETE FROM contactus where messageid='$id'";
+      if (mysqli_query($conn, $sql)) {
+  ;
+        header('location:../../admincontact.php');
+      } else {
+        echo " There was an error in deleting is record from your database. Please try again";
+        echo "Error deleting record: " . mysqli_error($conn);
+        echo "<button>
+        <a href='../../contactus.php'>Back to Table</a>
+      </button>";
+
+   
+        }
+      break;
+            
+      case "inventory":
+        $sql="DELETE FROM inventory where inventory_id='$id'";
+        if (mysqli_query($conn, $sql)) {
+          header('location:../../admininventory.php');
+        } else {
+          echo " There was an error in deleting is record from your database. Please try again";
+          echo "Error deleting record: " . mysqli_error($conn);
+          }
+
+          echo "<button>
+          <a href='../../admincontact.php'>Back to Table</a>
+        </button>";
+        break;
+
+
+       
+
+      default: 
+          echo "Not deleted";
+
 }
-
-
-?>
-
-
-<?php
 $conn->close();
+
+
+
 ?>
-<br>

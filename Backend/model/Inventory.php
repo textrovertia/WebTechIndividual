@@ -72,5 +72,21 @@ class Inventory
         $stmt->execute();
         return $stmt;
     }
+    public function getItem($category){
+        $query = "SELECT inventory_name, qty_in_stock, price FROM inventory where inventory_category='$category'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getMedicine(){
+        $query = 'SELECT inventory_name, qty_in_stock, price FROM inventory where inventory_category="medicine"';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+
+
 
 }
