@@ -22,7 +22,7 @@ class Warehouse
     {
         $this->conn = $db;
     }
-    public function create()
+  /*   public function create()
     {
         // $query = 'INSERT into ' .
         //     $this->table .
@@ -60,7 +60,7 @@ class Warehouse
         printf("Error: %s.\n", $stmt->error);
 
         return false;
-    }
+    } */
     public function getId()
     {
         return $this->id;
@@ -74,4 +74,20 @@ class Warehouse
         return $stmt;
     }
     
+    public function getWarehouseLocation($id){
+        $query="SELECT street_name from warehouse where warehouse_id= '$id'";
+        $stmt = $this->conn->prepare($query);
+       
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getWarehouseId($streetname){
+        $query="SELECT warehouse_id from warehouse where street_name='$streetname' ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+
 }

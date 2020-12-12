@@ -27,6 +27,7 @@ include_once '../model/Employee.php';
  $id = $_REQUEST["id"];
 $table=$_REQUEST['table'];
 echo $table;
+echo $id; 
 
 if($table==="employee"){
     
@@ -41,7 +42,9 @@ if (isset($_POST['submit'])){
    
 
   
-          $sql="UPDATE employee SET first_name='$fname' last_name='$lname', department='$date' , email='$email', date_employed='$date' WHERE id=4";
+    $sql ="UPDATE employee
+    SET first_name = '$fname', last_name = '$lname', date_employed='$date', department='$dept', email='$email'
+    WHERE employee_id=1";
         if ($db->exec($sql)){
   
           echo "Yayyyyy";

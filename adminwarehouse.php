@@ -116,8 +116,7 @@ include_once './Backend/model/Employee.php';
         <?php
 while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
  
-          ?>		
-          <?php 
+         
            $second=$employee->getEmployeeName($row["employee_id"]);
            while ( $row2 = $second->fetch(PDO::FETCH_ASSOC)){
               $employeeName= $row2['first_name'] .' '.$row2['last_name'];
@@ -152,7 +151,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
     </div>
 
     <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Add Employee
+    Add Warehouse
     </button>
 </div>
 
@@ -172,7 +171,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                     </div>
                     <div class="modal-body">
                     
-                      <form id="partnerform" method="POST"  action="Backend/config/add.php?table=warehouse" enctype="multipart/form-data" >
+                      <formmethod="POST"  action="Backend/config/add.php?table=warehouse" enctype="multipart/form-data" >
                         <p>Please enter the information below</p>
                         
                         <table>
@@ -257,70 +256,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 
     </main>
 
-    <?php
-
-// Insert into the table after adding the employee
-if (isset($_POST['submit'])){
-
-  
-  $fname = $_POST['fname'];
-  $lname=$_POST['lname'];
-  $email=$_POST['email'];
-  $streetname=$_POST['street_name'];
-  $streetnumber=$_POST['street_number'];
-  $town=$_POST['town'];
-  $region=$_POST['region'];
-  $maxcapacity=$_POST['max_cap'];
-
-  $employeeid=null;
-  $third=$employee->getEmployeeid($fname, $lname, $email);
-  while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
-    $employeeid= $row3['employee_id'] ;
-
-  
-  }
-  if($employeeid===null){
-    echo '<script>
-    alert("The employee entered does not exist");
-    </script>';
-  }else{
     
-    $sql="INSERT INTO warehouse(employee_id, street_name , street_number, town, region, capacity) VALUES('$employeeid', '$streetname','$streetnumber', '$town', '$region', '$maxcapacity')";
-    if ($db->query($sql)===true){
-        
-        echo '<script>
-        swal({
-            title: "Success!",
-            text: "You successfully added an employee to the database",
-            icon: "success",
-          }); 
-        
-        </script>';
-        
-    }else{
-        echo '<script>
-        swal({
-            title: "Error",
-            text: "You were unable to enter the data into the database",
-            icon: "error",
-          }); 
-   }
-        
-        </script>';
-        
-    };
-
-
-  }
-  
-
-}
-
-
-
-
-
-?>
  
  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>

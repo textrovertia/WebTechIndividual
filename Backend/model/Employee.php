@@ -104,7 +104,6 @@ class Employee
     public function getEmployeeName($id){
         $query="SELECT first_name, last_name, email from employee where employee_id= '$id'";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':e',$id);
         $stmt->execute();
         return $stmt;
     }
@@ -112,7 +111,6 @@ class Employee
     public function getEmployeeid($firstname, $lastname, $email){
         $query="SELECT employee_id from employee where first_name= '$firstname' AND last_name='$lastname' AND email='$email'";
         $stmt = $this->conn->prepare($query);
-   
         $stmt->execute();
         return $stmt;
     }
@@ -125,6 +123,15 @@ class Employee
 
     }
 
-    
+    public function updateEmployee($id,$firstname, $lastname, $dateemployed, $department, $email ){
+        $sql ="UPDATE employee
+        SET first_name = '$firstname', last_name = '$lastname', date_employed='$dateemployed', department='$department', email='$email'
+        WHERE employee_id='$id'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+        
+    }
+   
 
 }

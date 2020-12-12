@@ -1,8 +1,8 @@
 <?php
 
 include_once './Backend/config/Database.php';
-include_once './Backend/model/Employee.php';
-
+include_once './Backend/model/Inventory.php';
+include_once './Backend/model/Warehouse.php';
 
  //Instantiate DB and connect 
  $database = new Database();
@@ -10,34 +10,12 @@ include_once './Backend/model/Employee.php';
 
 
  $info = new Inventory($db);
- $result = $info->getEmployee();
+ $result = $info->getInventory();
 
+ $warehouse = new Warehouse($db);
+ 
  session_start();
  if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
-
-
-
-/* $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "freezelink";
-
-
-
-    //Create connection
-    $conn = new mysqli($servername, $username, $password,$dbname);
-    
-
-    //Check connection
-    if ($conn->connect_error){
-        die("Connection failed:".$conn->connect_error);
-    }else{
-      echo "Connection successful";
-    };
-    $sql = "SELECT * FROM partners";
-    $result = $conn->query($sql);
-  
- */
 ?>
 
 <!DOCTYPE html>
@@ -115,11 +93,13 @@ include_once './Backend/model/Employee.php';
     <div id="orders">
       <h3>Inventory</h3>
       <hr>
+
+      <!-- Card showing the total inventory -->
       <div class="row partnerscard">
         <div class="col-sm-4  mycard">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Medecine</h4>
+              <h4 class="card-title">Medicine</h4>
         
               <h1 class="card-text"><?php ?></h1>
             
@@ -127,37 +107,71 @@ include_once './Backend/model/Employee.php';
           </div>
         </div>
         
+        <!-- The data table  -->
+        <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+  
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Class</th>
+            <th scope="col">Warehouse Location</th>
+            <th scope="col">Quantity In Stock</th>
+            <th scope="col">Price per piece</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="contacting">
+        <?php
+        
+while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
+         
+  $second=$warehouse->getWarehouseLocation($row["warehouse_id"]);
+  while ( $row2 = $second->fetch(PDO::FETCH_ASSOC)){
+     $warehouseLocation= $row2['street_name'] ;
+  };
+      
+          ?>		
 
-      <?php
-
-          if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {    
-              $num=1
-          ?>		 
-
-      <!--Card to show Partner-->
-        <div class="container">
-              <div class="row">
-              
-            <div class="card mycard" style="width: 18rem;">
-                  <img class="card-img-top" src="images/fish.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"><?php echo $row["organisation_name"]; ?></h5>
-                    <p class="card-text">Equipment Donated:</p>
-                    <p class="card-text"><?php echo $row["equipment_donated"]?></p>
-                    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
-                    <button type="button" class="btn btn-danger" onclick="swal()">Delete</button>
-              </div>
-            </div>
-              
-              </div>
-        </div>
+            <tr id="contacting2">
+                <td><?php echo $row["inventory_id"];  ?></td>
+                <td><?php echo $row["inventory_name"]; ?></td>
+                <td><?php echo $row["inventory_category"]; ?></td>
+                <td><?php echo $warehouseLocation; ?></td>
+                <td><?php echo $row["qty_in_stock"]; ?></td>
+                <td><?php echo $row["price"]; ?></td>
+           
+                <td>
+                <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2">
+                <i class="fa fa-fw fa-edit"></i>
+                      </a>
+          
+                <a href="Backend/config/delete.php?table=employee&id=<?php echo $row['employee_id'];?>" class="text-danger" onClick="return confirm('Are you sure to delete this user?');"><i class="fa fa-fw fa-trash"></i></a> | 
+            </td>
+           
+            </tr>
+            
+	  
         <?php	
-          } }
+      
+          } 
         ?>
+	
+         
+        </tbody>
+            
+      </table>
+    </div>
+
+    <button type="button" id="mybtn1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                       Add more inventory
+                      </button>
+</div>
+
+      
     
-<!--Form to edit data-->
+<!--Form to add more inventory data-->
     
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -170,32 +184,44 @@ include_once './Backend/model/Employee.php';
                     </div>
                     <div class="modal-body">
                     
-                      <form id="partnerform" method="POST" action="upload.php" enctype="multipart/form-data" >
+                      <form method="POST"  action="Backend/config/add.php?table=inventory" enctype="multipart/form-data" >
                         <p>Please enter the information below</p>
                         
                         <table>
                             <tr>
-                                <td>Organisation Name:</td>
-                                <td><input  type="text" required placeholder="Enter organisation name here" class="form-control" name="orgname"></td>
+                                <td>Product Name:</td>
+                                <td><input  type="text" required placeholder="Enter product name here" class="form-control" name="product"></td>
                                
 
                             </tr>
                             <br>
                             <tr>
-                                <td>Equipment Donated:</td>
-                                <td><input  type="text"  required placeholder="Enter equipment here"  class="form-control" name="equipment"></td>
+                                <td>Product Type:</td>
+                                <td><input  type="text"  required placeholder="Enter product type here"  class="form-control" name="producttype"></td>
+                               
+                            </tr>
+                            <br>
+                            <tr>
+                                <td>Warehouse Street Name:</td>
+                                <td><input  type="text"  required placeholder="Enter warehouse street here"  class="form-control" name="streetname"></td>
+                            </tr>
+                            <tr>
+                                <td>Quantity in Stock:</td>
+                                <td><input  type="text"  required placeholder="Enter quantity in stock here"  class="form-control" name="qtyinstock"></td>
+                            </tr>
+                            <tr>
+                                <td>Price per piece:</td>
+                                <td><input  type="number"  required placeholder="Enter price per piece here"  class="form-control" name="priceperpiece"></td>
                                
                             </tr>
 
-                            <tr>
-                                <td> Company Logo:</td>
-                                <td><input  type="file" name="fileToUpload" id="fileToUpload" required> </td>
-                            </tr>
+
+                            
 
                         </table>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <a type="submit" onclick="getdisplaymode()" href="home.html" type="button" id="togglemode" class="btn btn-primary">Update</a>
+                            <input type="submit" value="Update" name="submit" class="btn btn-primary">
                           </div>
                       </form>
                       <p id="result"></p>
@@ -209,7 +235,6 @@ include_once './Backend/model/Employee.php';
 
 
 
-        <a href="#" class="btn btn-secondary">Add Car</a>
 
       
 
@@ -225,3 +250,62 @@ include_once './Backend/model/Employee.php';
     
 </body>
 </html> 
+
+var regexp = /^\d+\.\d{0,2}$/;
+
+<?php
+
+// Insert into the table after adding the employee
+if (isset($_POST['submit'])){
+
+  
+  $product = $_POST['product'];
+  $producttype=$_POST['producttype'];
+  $streetname=$_POST['streetname'];
+  $qtyinstock=$_POST['qtyinstock'];
+  $priceperpiece=$_POST['priceperpiece'];
+  
+  $warehouseid=null;
+  $third=$warehouse->getWarehouseid($streetname);
+  while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
+    $warehouse= $row3['warehouse'] ;
+
+  
+  }
+  if($warehouse===null){
+    echo '<script>
+    alert("The warehouse location entered does not exist");
+    </script>';
+  }else{
+    
+    $sql="INSERT INTO inventory(inventory_name, inventory_category, warehouse_id, qty_in_stock, price) VALUES('$product', '$producttype','$warehouseid', '$qtyinstock', '$priceperpiece')";
+    if ($db->query($sql)===true){
+        
+        echo '<script>
+        swal({
+            title: "Success!",
+            text: "You successfully added an employee to the database",
+            icon: "success",
+          }); 
+        
+        </script>';
+        
+    }else{
+        echo '<script>
+        swal({
+            title: "Error",
+            text: "You were unable to enter the data into the database",
+            icon: "error",
+          }); 
+   }
+        
+        </script>';
+        
+    };
+
+
+  }
+  
+
+}
+

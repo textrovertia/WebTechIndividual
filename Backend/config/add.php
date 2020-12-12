@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-</html>
 
+<body>
 <?php 
 include_once 'Database.php';
 include_once '../model/Employee.php';
+include_once '../model/Warehouse.php';
 
 
 
@@ -23,10 +24,71 @@ include_once '../model/Employee.php';
  $database = new Database();
  $db = $database->connect();
  $employee=new Employee($db);
+ $warehouse = new Warehouse($db);
 
 
 $table=$_REQUEST['table'];
 echo $table;
+
+
+if($table==="inventory"){
+  echo "Ho";
+ 
+  if (isset($_POST['submit'])){
+
+  
+    $product = $_POST['product'];
+    $producttype=$_POST['producttype'];
+    $streetname=$_POST['streetname'];
+    $qtyinstock=$_POST['qtyinstock'];
+    $priceperpiece=$_POST['priceperpiece'];
+    
+    $warehouseid=null;
+    $third=$warehouse->getWarehouseid($streetname);
+    while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
+      $warehouseid= $row3['warehouse_id'] ;
+      echo $warehouseid;
+  
+    
+    }
+    if($warehouseid===null){
+      echo '<script>
+      alert("The warehouse location entered does not exist");
+      </script>';
+    }else{
+      
+      $sql="INSERT INTO inventory(inventory_name, inventory_category, warehouse_id, qty_in_stock, price) VALUES('$product', '$producttype','$warehouseid', '$qtyinstock', '$priceperpiece')";
+      echo 'Done';
+      if ($db->query($sql)===true){
+          
+          echo '<script>
+          swal({
+              title: "Success!",
+              text: "You successfully added an employee to the database",
+              icon: "success",
+            }); 
+          
+          </script>';
+          
+      }else{
+          echo '<script>
+          swal({
+              title: "Error",
+              text: "You were unable to enter the data into the database",
+              icon: "error",
+            }); 
+     }
+          
+          </script>';
+          
+      };
+  
+  
+    }
+    
+  
+}
+};
 
 if($table==="employee"){
     
@@ -43,7 +105,7 @@ if (isset($_POST['submit'])){
         if ($db->exec($sql)){
   
           echo "Yayyyyy";
-          // header('location:../../adminemployee.php');
+          header('location:../../adminemployee.php');
             
         }else{
             echo '<script>
@@ -91,16 +153,7 @@ if (isset($_POST['submit'])){
       
       $sql="INSERT INTO warehouse(employee_id, street_name , street_number, town, region, capacity) VALUES('$employeeid', '$streetname','$streetnumber', '$town', '$region', '$maxcapacity')";
       if ($db->query($sql)===true){
-          echo "Hi";
-          
-          echo '<script>
-          swal({
-              title: "Success!",
-              text: "You successfully added an employee to the database",
-              icon: "success",
-            }); 
-          
-          </script>';
+        header('location:../../adminwarehouse.php');
           
       }else{
           echo '<script>
@@ -113,12 +166,16 @@ if (isset($_POST['submit'])){
           
           </script>';
           
-      };
+      }
   
   
-    };
+    }
 
-};
+}
+
+
+
+
 }
 
 
@@ -128,3 +185,5 @@ if (isset($_POST['submit'])){
 
 ?>
  
+ </body>
+ </html>

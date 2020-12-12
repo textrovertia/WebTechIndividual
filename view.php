@@ -1,4 +1,6 @@
 <?php
+require_once './Backend/model/Inventory.php';
+//Create a new class called View to contain the HTML card code
 class View{
   public $src;
   public $cardtitle; 
@@ -12,27 +14,51 @@ class View{
   public function createNew($src, $cardtitle, $cardmessage){
 
 
-    return  <<<__DISPLAY
-      <div class="col-sm-4">
-                  <div class="card mycard bg-dark" style="width: 18em; border-radius:15px;">
-                    <img class="card-img-top" src='$src' alt="Card image cap" style="border-radius:15px 15px 0px 0px;">
-                        <div class="card-body">
-                        
-                         $cardmessage
-                          <a href="customerlogin.php"><i class="fas fa-shopping-cart"></i></a>
-                          
-                      </div>
-                      </div>
-                </div>
+    $card= <<<__DISPLAY
+    <div class="col-sm-4">
+    <div class="card mycard" style="width: 18em; border-radius:15px;">
+      <img class="card-img-top" src='$src' alt="Card image cap" style="border-radius:15px 15px 0px 0px;">
+ 
+        <div class="card-body">
+        <h3 class="card-title">$cardtitle</h3>  
+                    
+                     $cardmessage
+                     <br>
+                    <span>Click here to make a purchase:</span>  <a href="customerlogin.php"> <i class="fas fa-shopping-cart"></i></a>
+                      
+                  </div>
+                  </div>
+            </div>
+    
     __DISPLAY;
+    echo '<script language="javascript">
+    var ele=document.getElementsByClassName("mycard");
+    console.log(ele);
+    webmode=localStorage.getItem("webmode");
+    console.log(webmode);
+    if (webmode==="lightmode"){
+     ele.className="card";
+     echo
+     console.log("This is light code")
+    }else{
+      ele.className+="bg-dark";
+      console.log("This is dark code")
+    }
+
+    </script>';
+    
+    return $card;
   }
 }
 
+//create a new instance of the View class
 $info=new View;
 
+//create a new instance of the Inventory class
 
+$inventory=new Inventory;
+$result = $inventory->getInventory();
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -83,9 +109,7 @@ $info=new View;
                       
                     </div>
                   </div>
-        
-                    
-                  <a class="nav-item nav-link"  style="color:white;" href="contactus.php">Contact Us </a>
+                   <a class="nav-item nav-link"  style="color:white;" href="contactus.php">Contact Us </a>
                   <a class="nav-item nav-link" style="color:white;" href="faq.html">FAQ</a>
 
 
@@ -108,18 +132,17 @@ $info=new View;
     </div>
     <!--Medicine-->
     <div class="container" id="medicine">
-    <h2>Medicine</h2>
-  
-    <?php 
-   echo $info->createNew("images/medicine.jpg", "Hello! I am working", "This is about medicine"); 
-   echo $info->createNew("images/medicine.jpg", "Hello! I am working", "This is it "); 
-   echo $info->createNew("images/medicine.jpg", "Hello! I am working", "Done!"); 
-    
-    ?>
+        <h2>Medicine</h2>
+        <?php 
+          echo $info->createNew("images/medicine.jpg", "Paracetamol ", "We sell paracetamol in bulk and transport it to the various locations around Ghana."); 
+          echo $info->createNew("images/medicine.jpg", "Hello! ", "This is it "); 
+          echo $info->createNew("images/medicine.jpg", "Hello!", "Done!"); 
+        
+        ?>
 
-    </div>
+        </div>
 
-    <div class="space" style="height:200px;">
+   
   
     </div>
 
@@ -140,6 +163,13 @@ $info=new View;
     <!--Vegetables-->
     <div class="container" id="vegetables">
       <h2>Vegetables</h2>
+      <?php 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
+        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
+          
+    ?> 
+    
     
     
     </div>
@@ -147,6 +177,13 @@ $info=new View;
     <!--Dairy-->
     <div class="container" id="dairy">
       <h2>Dairy</h2>
+      <?php 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
+        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
+          
+    ?> 
+    
     
     
     
@@ -155,13 +192,25 @@ $info=new View;
     <!--Meat-->
     <div class="container" id="meat">
       <h2>Meat</h2>
+      <?php 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
+        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
+          
+    ?> 
     
     
     </div>
 
    <div class="container" id="fish">
      <h2>Fish</h2>
-     <?php $info ?>
+     <?php 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "This is about medicine"); 
+        echo $info->createNew("images/fruit_background.jpg", "Hello! I am working", "This is it "); 
+        echo $info->createNew("images/fruits.jpg", "Hello! I am working", "Done!"); 
+          
+    ?> 
+    
    </div>
 
 
@@ -225,7 +274,7 @@ $info=new View;
 </main>
 
 
-
+<!-- The footer of the document -->
         <footer class="panel-footer">
           <div class="container">
             <div class="row">

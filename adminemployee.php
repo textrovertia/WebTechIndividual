@@ -177,7 +177,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                 <td><?php echo $row["email"]; ?></td>
            
                 <td>
-                <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2">
+                <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2" name=<?php echo $row['employee_id'];?>>
                 <i class="fa fa-fw fa-edit"></i>
                       </a>
           
@@ -220,7 +220,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                       </button>
                     </div>
                     <div class="modal-body">
-                    
+                      
                       <form id="partnerform" method="POST" action="Backend/config/add.php?table=employee" enctype="multipart/form-data" >
                         <p>Please enter the information below</p>
                         
@@ -228,8 +228,6 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                             <tr>
                                 <td>First Name:</td>
                                 <td><input  type="text" required placeholder="Enter first name here" class="form-control" name="fname"></td>
-                               
-
                             </tr>
                             <br>
                             <tr>
@@ -237,7 +235,6 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                                 <td><input  type="text"  required placeholder="Enter last name here"  class="form-control" name="lname"></td>
                                
                             </tr>
-
                             <tr>
                                 <td>Date Employed:</td>
                                 <td><input  type="date" class="form-control" name="date_e" required> </td>
@@ -294,7 +291,7 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
                     </div>
                     <div class="modal-body">
                     
-                      <form id="partnerform" method="POST" action="Backend/config/add.php?table=employee" enctype="multipart/form-data" >
+                      <form id="partnerform" method="POST" action="Backend/config/update.php?table=employee" enctype="multipart/form-data" >
                         <p>Please edit the information below</p>
                         
                         <table>

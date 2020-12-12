@@ -1,7 +1,7 @@
 <?php
 include_once 'Warehouse.php';
 
-class Warehouse 
+class Inventory 
 {
     private $conn;
     private $table = 'inventory';
@@ -21,7 +21,7 @@ class Warehouse
     {
         $this->conn = $db;
     }
-    public function create()
+   /*  public function create()
     {
         // $query = 'INSERT into ' .
         //     $this->table .
@@ -59,18 +59,18 @@ class Warehouse
         printf("Error: %s.\n", $stmt->error);
 
         return false;
-    }
+    } */
     public function getId()
     {
         return $this->id;
         
     }
     
-    public function getWarehouse(){
-        $query = 'SELECT * FROM '.$this->table;
+    public function getInventory(){
+        $query = 'SELECT * FROM inventory';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }
-    
+
 }
