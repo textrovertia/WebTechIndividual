@@ -131,6 +131,8 @@
 
 // Check email validity when field loses focus
 email=document.getElementById("email");
+form=document.getElementById("form");
+
 console.log(email)
 document.getElementById("email").addEventListener("focus", e => {
 console.log("hi")
@@ -140,18 +142,15 @@ const emailRegex = /.+@.+\..+/;
 let validityMessage = "";
 if (!emailRegex.test(e.target.value)) {
     validityMessage = "Invalid address";
-  
-    
-    email.style.border= "5px";
-    email.style.borderColor="blue";
-    console.log("Yes")
+    color='red'
+    form.preventDefault()
 }else{
   validityMessage = "Correct address";
-
+  color='green'
   console.log("No")
 }
-document.getElementById("emailHelp").textContent = validityMessage;
-document.getElementById("emailHelp").style.color='red';
+document.getElementById("emailHelp").innerHTML = `<small style='color: ${color} '>` +validityMessage+"</small>";
+
 });
 
 </script>

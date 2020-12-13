@@ -12,25 +12,4 @@ if(!passwordresult){
 
 
 
-// Check email validity when field loses focus
-email=document.getElementById("email");
-console.log(email)
-document.getElementById("email").addEventListener("focus", e => {
-console.log("hi")
-  // Match a string of the form xxx@yyy.zzz
-const emailRegex = /.+@.+\..+/;
 
-let validityMessage = "";
-if (!emailRegex.test(e.target.value)) {
-    validityMessage = "Invalid address";
-    
-    email.style.border= "5px";
-    email.style.borderColor="blue";
-    console.log("Yes")
-}else{
-  validityMessage = "Correct address";
-  console.log("No")
-}
-document.getElementById("emailHelp").textContent = validityMessage;
-document.getElementById("emailHelp").color='red';
-});
