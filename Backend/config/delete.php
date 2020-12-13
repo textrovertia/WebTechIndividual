@@ -91,7 +91,23 @@ switch ($table){
           }
 
           echo "<button>
-          <a href='../../admincontact.php'>Back to Table</a>
+          <a href='../../admininventory.php'>Back to Table</a>
+        </button>";
+        break;
+
+                 
+      case "orders":
+        $sql="DELETE FROM orders where order_no='$id'";
+        if (mysqli_query($conn, $sql)) {
+
+           header('location:../../adminorder.php');
+        } else {
+          echo " There was an error in deleting is record from your database. Please try again";
+          echo "Error deleting record: " . mysqli_error($conn);
+          }
+
+          echo "<button>
+          <a href='../../adminorder.php'>Back to Table</a>
         </button>";
         break;
 

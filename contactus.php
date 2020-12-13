@@ -83,6 +83,7 @@
                         <label>Email</label>
                         <input type="text" required placeholder="Email" name="email" id="email">
                         <br>
+                        <p >Wazzup</p>
                         <p id="emailHelp" style="color:red;"></p>
                         <label>Message</label><br><br>
                         <textarea type="text" style="width:20em;" required placeholder="Message" name="messages" class="message"></textarea>
@@ -139,16 +140,18 @@ const emailRegex = /.+@.+\..+/;
 let validityMessage = "";
 if (!emailRegex.test(e.target.value)) {
     validityMessage = "Invalid address";
+  
     
     email.style.border= "5px";
     email.style.borderColor="blue";
     console.log("Yes")
 }else{
   validityMessage = "Correct address";
+
   console.log("No")
 }
 document.getElementById("emailHelp").textContent = validityMessage;
-document.getElementById("emailHelp").color='red';
+document.getElementById("emailHelp").style.color='red';
 });
 
 </script>

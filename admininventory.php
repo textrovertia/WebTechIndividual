@@ -8,7 +8,7 @@ include_once './Backend/model/Warehouse.php';
  $database = new Database();
  $db = $database->connect();
 
-
+//Create new instance
  $info = new Inventory($db);
  $result = $info->getInventory();
 
@@ -80,11 +80,10 @@ include_once './Backend/model/Warehouse.php';
      <div class="bg-light border-right sidenav" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
       
-            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Orders</a>
+            <a href="adminorder.php" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Orders</a>
             <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
             <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
             <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
-            <!-- <a href="adminpartner.php"><span class="icon"><i class="fas fa-handshake"></i></span>Partners</a> -->
             <a href="admincontact.php"><span class="icon"><i class="fas fa-address-book"></i></span>Messages </a>
       </div>
     </div>

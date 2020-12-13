@@ -1,4 +1,6 @@
 <?php
+
+//Start customer session
  session_start();
 include_once './Backend/config/Database.php';
 require_once './Backend/model/Inventory.php';

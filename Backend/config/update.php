@@ -4,12 +4,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-       
-    <link rel="stylesheet" href="css/adminlogin.css" >
+    <link rel="stylesheet" href="../../css/adminlogin.css" >
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       
+    
 </head>
 <body>
 <?php 
@@ -26,8 +27,13 @@ include_once '../model/Employee.php';
  $id = $_REQUEST["id"];
 $table=$_REQUEST['table'];
  echo $id;
+ echo $table;
 
-if($table==="employee"){
+$newText=$_POST["newText"];
+
+
+switch ($table){
+  case "employee":
     
 if (isset($_POST['submit'])){
 
@@ -53,9 +59,43 @@ if (isset($_POST['submit'])){
             
         };
   
-  }
+  
+
+}
+break;
+case "orders":
+
+  
+if (isset($_POST['submit'])){
+
+  
+  $productname = $_REQUEST['productname'];
+  $customername=$_POST['customername'];
+  $qty=$_POST['qty'];
+
+  echo "Hoe";
+  
+ 
 
 
+ /*  $sql ="UPDATE orders
+  SET inventory_= '$fname', last_name = '$lname', date_employed='$date', department='$dept', email='$email'
+  WHERE employee_id='$id'";
+      if ($db->exec($sql)){
+
+      
+         header('location:../../adminemployee.php');
+          
+      }else{
+          echo 'You were unable to edit the information given. It is likely that the id you entered was wrong';
+          
+      };
+ */
+
+
+}
+
+/* 
 }elseif($table==="warehouse"){
 // Insert into the table after adding the employee
 if (isset($_POST['submit'])){
@@ -101,7 +141,7 @@ if (isset($_POST['submit'])){
   
     };
 
-};
+}; */
 }
 
 ?>

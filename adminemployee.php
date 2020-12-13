@@ -21,43 +21,6 @@ include_once './Backend/model/Employee.php';
  if(!isset($_SESSION['userId'])){ header('location:adminlogin.php');}
 
 
-/* 
-$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "freezelink";
-
-
-
-     echo 'SELECT COUNT("employee_id") FROM employee'; 
-
-    //Create connection
-    $conn = new mysqli($servername, $username, $password,$dbname);
-    
-
-    //Check connection
-    if ($conn->connect_error){
-        die("Connection failed:".$conn->connect_error);
-    }
-    $sql1 = "SELECT * FROM employee";
-    $result = $conn->query($sql1);
-
-  
-$sql1="SELECT * FROM employee";
-
-if ($result2=mysqli_query($con,$sql1))
-  {
-  // Return the number of rows in result set
-  $rowcount=mysqli_num_rows($result2);
-  printf("Result set has %d rows.\n",$rowcount);
-  // Free result set
-  mysqli_free_result($result2);
-  }
- */
-
-   
-  
-
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +57,7 @@ if ($result2=mysqli_query($con,$sql1))
     </script>
 
 </head>
+
 <body>
 
 
@@ -117,7 +81,7 @@ if ($result2=mysqli_query($con,$sql1))
      <div class="bg-light border-right sidenav" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
       
-            <a href="#orders" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Orders</a>
+            <a href="adminorder.php" class="menu-item"><span class="icon" ><i class="fas fa-user"></i></span>Orders</a>
             <a href="adminwarehouse.php"><span class="icon" ><i class="fas fa-warehouse"></i></span>Warehouse</a>
             <a href="admininventory.php"><span class="icon" ><i class="fas fa-boxes"></i></span>Inventory</a>
             <a href="adminemployee.php"><span class="icon" ><i class="fas fa-user-friends"></i></span>Employees</a>
@@ -172,17 +136,17 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
       
           ?>		
 
-            <tr id="contacting2">
+            <tr id="contacting2" class=<?php echo $row["employee_id"]; ?>>
             <form method="POST">
-                <td name="id"><?php echo $row["employee_id"];  ?></td>
-                <td value=><?php echo $row["first_name"]; ?></td>
-                <td><?php echo $row["last_name"]; ?></td>
-                <td><?php echo $row["date_employed"]; ?></td>
-                <td><?php echo $row["department"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
+                <td><?php echo $row["employee_id"];  ?></td>
+                <td id="first" contenteditable="true"><?php echo $row["first_name"]; ?></td>
+                <td id="last " contenteditable="true"><?php echo $row["last_name"]; ?></td>
+                <td id="date" contenteditable="true"><?php echo $row["date_employed"]; ?></td>
+                <td contenteditable="true"><?php echo $row["department"]; ?></td>
+                <td contenteditable="true"><?php echo $row["email"]; ?></td>
            
                 <td>
-            <a id="mybtn1" type="submit" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2" name=<?php echo $row['employee_id'];?>>  </form> 
+            <a id="mybtn1" data-toggle="modal" class="text-primary" data-target="#exampleModalCenter2" name=<?php echo $row['employee_id'];?> onclick="name(getElementsByClassName(<?php echo $row['employee_id'];?>))">  </form> 
                 <i class="fa fa-fw fa-edit"></i>
                       </a>
           
@@ -367,10 +331,14 @@ while ( $row = $result->fetch(PDO::FETCH_ASSOC)){
 </div>
 
 
-<
 
 
     </main> 
+
+    <script>
+
+ 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <script scr="js/jquery-3.5.1.js"></script>
     <script src="js/admincontactus.js"></script>

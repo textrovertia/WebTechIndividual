@@ -29,10 +29,17 @@ class Customer
         $stmt->execute();
         return $stmt;
     }
-    public function validateEmail(){
-        $query = 'SELECT COUNT(*) as exist FROM '.$this->table.' where email=:e';
+   
+    public function getCustomerId($email){
+        $query="SELECT customer_id from customer where email='$email'";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':e', $this->email);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getCustomerEmail($id){
+        $query="SELECT email from customer where customer_id='$id'";
+        $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
     }

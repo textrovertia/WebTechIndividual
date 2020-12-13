@@ -5,6 +5,7 @@ $order=$_REQUEST["order"];
 
 include_once './Backend/config/Database.php';
 include_once './Backend/model/Inventory.php';
+include_once './Backend/model/Customer.php';
 include_once './Backend/model/Orders.php';
 
  //Instantiate DB and connect 
@@ -13,6 +14,7 @@ include_once './Backend/model/Orders.php';
 
 
  $inventory = new Inventory($db);
+ $customer =new Customer($db);
 
 
 ?>
@@ -43,37 +45,27 @@ include_once './Backend/model/Orders.php';
 <div class="login">
   <h3>Place your orders here</h3>
     <form method="post">
-      <input type="text" name="user" placeholder="Username" required="required" readonly value=<?php echo $_SESSION['email']?> />
+      <input type="text" name="email" placeholder="Username" required="required" readonly value=<?php echo $_SESSION['email']?> />
       <input type="text" name="order" placeholder="Order" required="required"  readonly value=<?php echo $order;?> />
       <input type="text" name="qty" placeholder="Quantity ordered" required="required"/>
-    
-
-<p>Don't have an account? <a href="customersignup.php">Sign Up here </a></p>
         <button type="submit" class="btn btn-primary btn-large" name="ordersubmit">Place Order</button>
     </form>
 </div>
 
 
-
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
-    <script src="js/admincontactus.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/95e3cf507f.js"></script>
+   
     </body>
 </html>
 
 
 
 <?php
-
-// include_once './Backend/config/Database.php';
-// include_once './Backend/model/admin.php';
-
-
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -92,56 +84,43 @@ if(isset($_POST['ordersubmit']))
 	$error ="";
 	$email = $_POST['email'];
     $order = $_POST['order'];
-    $qty = $_POST['order'];
+    $qty = $_POST['qty'];
+
+    $second=$customer->getCustomerId($email);
+    while ( $row2 = $second->fetch(PDO::FETCH_ASSOC)){
+        $customer_id=$row2['customer_id'];
+    }
+  
+    $third=$inventory->getInventoryId($order);
+    while ( $row3 = $third->fetch(PDO::FETCH_ASSOC)){
+        $inventory_id=$row3['inventory_id'];
+    }
+   
     
-   
-
-	$sql= "INSERT INTO orders( first_name, email, account_password, customer_id FROM customer WHERE email='$user'";
-
-
-	$result = mysqli_query($conn, $sql);
-	$row = mysqli_fetch_assoc($result);
-   
-    if ($row===null){
-        echo "<script>alert('Wrong password or email')</script>";
-    }else{
-    $hash=$row["account_password"];
-	$auth = password_verify($_POST['password1'], $hash);
-	if ($auth==TRUE){
-        session_start();
-        $result = mysqli_query($conn, $sql);
-	   $data = $result->fetch_assoc();
-       $_SESSION['userId'] = $data['customer_id'];
-       $_SESSION['firstname'] = $data['first_name'];
-        echo $_SESSION['userId'];
-        echo  $_SESSION['firstname'];
-        echo "Hi";
-
-	 header('location:view.php');
-	}elseif($auth==FALSE){
-        
-        echo '<script type="javascript">
-        console.log("ewjfd")
-        alert("You entered the wrong password. Please try again")
+	$sql= "INSERT INTO orders( inventory_id, customer_id, qty_ordered) VALUES('$inventory_id', '$customer_id', '$qty') ";
+    if ($conn->query($sql)===true){
+        echo '<script>
+        swal({
+            title: "Good job!",
+            text: "You placed your order! An employee will be in touch with you shortly! Thank you for patronizing Freezelink Limited",
+            icon: "success",
+          });
         
         </script>';
-	}};
-  /*  $result = $conn->query("select * from manager where email = '$user' AND account_password = '$pass'");
-   if($result->num_rows > 0)
-   {
-	   session_start();
-	   $data = $result->fetch_assoc();
-	   $_SESSION['userId'] = $data['id'];
-	   header('location:admin.php');
-   }
-
-   else{
-	echo '<script language="javascript">
-	alert("You have entered the wrong credentials. Please try again")
-	</script>';
-
-	echo "Hi";
-	header('location:admincontact.php'); */
-   
+        echo ' <a href="customerlogout.php" class="btn btn-primary btn-large" style="float:right;" name="logout">Logout</a>';
+      
+        
+    }else{
+        echo '<script>
+        swal({
+            title: "Error!",
+            text: "We could not enter your order!",
+            icon: "error",
+          });
+        
+        </script>';
+      
+        echo "Error".$sql."<br>".$conn->error;
+    }
    };
 ?>
